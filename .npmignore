@@ -1,3 +1,4 @@
-*.ts
-.gitlab-ci.yml
+.github
+index.ts
+server.ts
 tsconfig.json
