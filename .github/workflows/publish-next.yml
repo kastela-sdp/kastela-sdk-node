@@ -18,6 +18,8 @@ jobs:
           scope: '@kastela-sdp'
       - run: npm ci
       - run: npm run build
+      - run: git config --local user.name "Hash Rekayasa Teknologi"
+      - run: git config --local user.email "hello@hash.id"
       - run: npm version prerelease --preid ${GITHUB_SHA::7}
       - run: npm publish --tag next --access public
         env:
