@@ -20,7 +20,7 @@ jobs:
       - run: npm run build
       - run: git config --local user.name "Hash Rekayasa Teknologi"
       - run: git config --local user.email "hello@hash.id"
-      - run: npm version prerelease --preid ${GITHUB_SHA::7}
+      - run: npm version prerelease --preid ${GITHUB_SHA::8}
       - run: npm publish --tag next --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
