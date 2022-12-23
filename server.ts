@@ -13,7 +13,7 @@ app.use(express.json());
 
 app.post("/vault/:vaultId/store", async (req, res, next) => {
   try {
-    const ids = await client.vault.store(req.params.vaultId, req.body);
+    const ids = await client.vaultStore(req.params.vaultId, req.body);
     res.send(ids);
   } catch (error) {
     next(error);
@@ -25,7 +25,7 @@ app.get("/vault/:vaultId", async (req, res, next) => {
     if (!req.query.search) {
       throw new Error("search not found in query parameter");
     }
-    const ids = await client.vault.fetch(
+    const ids = await client.vaultFetch(
       req.params.vaultId,
       req.query.search.toString(),
       {
@@ -41,7 +41,7 @@ app.get("/vault/:vaultId", async (req, res, next) => {
 
 app.post("/vault/:vaultId/get", async (req, res, next) => {
   try {
-    const data = await client.vault.get(req.params.vaultId, req.body);
+    const data = await client.vaultGet(req.params.vaultId, req.body);
     res.json(data);
   } catch (error) {
     next(error);
@@ -50,7 +50,7 @@ app.post("/vault/:vaultId/get", async (req, res, next) => {
 
 app.put("/vault/:vaultId/:token", async (req, res, next) => {
   try {
-    await client.vault.update(req.params.vaultId, req.params.token, req.body);
+    await client.vaultUpdate(req.params.vaultId, req.params.token, req.body);
     res.send("OK");
   } catch (error) {
     next(error);
@@ -59,7 +59,7 @@ app.put("/vault/:vaultId/:token", async (req, res, next) => {
 
 app.delete("/vault/:vaultId/:token", async (req, res, next) => {
   try {
-    await client.vault.delete(req.params.vaultId, req.params.token);
+    await client.vaultDelete(req.params.vaultId, req.params.token);
     res.send("OK");
   } catch (error) {
     next(error);
@@ -68,7 +68,7 @@ app.delete("/vault/:vaultId/:token", async (req, res, next) => {
 
 app.post("/protection/:protectionId/seal", async (req, res, next) => {
   try {
-    await client.protection.seal(req.params.protectionId, req.body);
+    await client.protectionSeal(req.params.protectionId, req.body);
     res.send("OK");
   } catch (error) {
     next(error);
@@ -77,10 +77,7 @@ app.post("/protection/:protectionId/seal", async (req, res, next) => {
 
 app.post("/protection/:protectionId/open", async (req, res, next) => {
   try {
-    const data = await client.protection.open(
-      req.params.protectionId,
-      req.body
-    );
+    const data = await client.protectionOpen(req.params.protectionId, req.body);
     res.json(data);
   } catch (error) {
     next(error);
