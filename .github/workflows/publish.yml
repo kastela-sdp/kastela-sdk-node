@@ -21,4 +21,18 @@ jobs:
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Build Docs
+        uses: andstor/jsdoc-action@v1
+        with:
+          source_dir: ./
+          output_dir: ./out
+          config_file: ./jsdoc.json
+          template: better-docs
+          front_page: README.md
+
+      - name: Deploy Docs
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          publish_dir: ./out
   
