@@ -1,12 +1,12 @@
 {
   "name": "@kastela-sdp/kastela-sdk-node",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Kastela SDK for Node.js",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon server.ts",
     "build": "tsc",
-    "docs": "jsdoc -c jsdoc.json"
+    "docs": "jsdoc -c jsdoc.json README.md"
   },
   "repository": {
     "type": "git",
