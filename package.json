@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon server.ts",
     "build": "tsc",
-    "docs": "jsdoc -c jsdoc.json"
+    "docs": "jsdoc -c jsdoc.json README.md"
   },
   "repository": {
     "type": "git",
