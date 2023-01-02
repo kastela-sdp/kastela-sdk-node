@@ -22,13 +22,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Build Docs
-        uses: andstor/jsdoc-action@v1
-        with:
-          source_dir: ./
-          output_dir: ./out
-          config_file: jsdoc.json
-          template: better-docs
-          front_page: README.md
+        run: npm run docs
 
       - name: Deploy Docs
         uses: peaceiris/actions-gh-pages@v3
