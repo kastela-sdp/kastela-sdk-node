@@ -1,4 +1,4 @@
-# Kastela SDK for Node.js
+# Kastela Server SDK for Node.js
 
 Credential is required when using the SDK, download it on the entities page.
 
@@ -13,5 +13,6 @@ const client = new Client(
   "./client.crt",
   "./client.key"
 );
+
 const data = client.protectionOpen(protectionId, [1, 2, 3, 4]);
 ```
