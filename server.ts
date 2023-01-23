@@ -2,7 +2,7 @@ import { Client } from "./index";
 import express, { NextFunction, Request, Response } from "express";
 
 const client = new Client(
-  "https://127.0.0.1:8080",
+  "https://127.0.0.1:3100",
   "./ca.crt",
   "./client.crt",
   "./client.key"
@@ -78,6 +78,15 @@ app.post("/protection/:protectionId/seal", async (req, res, next) => {
 app.post("/protection/:protectionId/open", async (req, res, next) => {
   try {
     const data = await client.protectionOpen(req.params.protectionId, req.body);
+    res.json(data);
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.post("/proxy", async (req, res, next) => {
+  try {
+    const data = await client.privacyProxy(req.body);
     res.json(data);
   } catch (error) {
     next(error);
