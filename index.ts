@@ -6,6 +6,7 @@ import semver from "semver";
 const expectedKastelaVersion = "v0.0";
 const vaultPath = "/api/vault";
 const protectionPath = "/api/protection";
+const secureChannelPath = "/api/secure-channel";
 
 /**
  * @class
@@ -80,7 +81,7 @@ export class Client {
    * @example
    * // store jhon doe and jane doe data
    * client.vaultStore("yourVaultId", [{name: "jhon doe", secret : "12345678"}, {name: "jane doe", secret : "12345678"}])
-   * 
+   *
    */
   public async vaultStore(vaultId: string, data: any[]): Promise<string[]> {
     const { ids } = await this.#request(
@@ -161,7 +162,7 @@ export class Client {
    * @param {string} vaultId
    * @param {string} token vault token
    * @return {Promise<void>}
-   * @example 
+   * @example
    * //delete vault with token '331787a5-8930-4167-828f-7e783aeb158c'
    * client.vaultDelete("yourVaultId", "331787a5-8930-4167-828f-7e783aeb158c")
    */
@@ -206,5 +207,48 @@ export class Client {
       { ids }
     );
     return data;
+  }
+
+  /** Begin secure channel.
+   * @param {string} protectionId
+   * @param {string} clientPublicKey client public key in base64 enconding
+   * @param {number} [ttl] time to live in minutes
+   * @return {Promise<{id: string, serverPublicKey: string}>} secure channel id and server public key
+   * @example
+   * 	// decrypt data with id 1,2,3,4,5
+   * client.secureChannelBegin("yourProtectionId", "yourClientPublicKey", 5)
+   */
+  public async secureChannelBegin(
+    protectionId: string,
+    clientPublicKey: string,
+    ttl?: number
+  ): Promise<{ id: string; serverPublicKey: string }> {
+    const { data } = await this.#request(
+      "POST",
+      new URL(`${secureChannelPath}/begin`, this.#kastelaUrl),
+      {
+        protection_id: protectionId,
+        client_public_key: clientPublicKey,
+        ttl: ttl,
+      }
+    );
+    return { id: data.id, serverPublicKey: data.server_public_key };
+  }
+
+  /** Commit secure channel.
+   * @param {string} secureChannelId
+   * @return {Promise<void>}
+   * @example
+   * 	// decrypt data with id 1,2,3,4,5
+   * client.secureChannelCommit("yoursecureChannelId")
+   */
+  public async secureChannelCommit(secureChannelId: string): Promise<void> {
+    await this.#request(
+      "POST",
+      new URL(
+        `${secureChannelPath}/${secureChannelId}/commit`,
+        this.#kastelaUrl
+      )
+    );
   }
 }
