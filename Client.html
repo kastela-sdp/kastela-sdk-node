@@ -358,8 +358,8 @@ Require server information and return client instance.</div>
 
 
     
-    <h4 class="name" id="privacyProxy">
-        <a class="href-link" href="#privacyProxy">#</a>
+    <h4 class="name" id="privacyProxyRequest">
+        <a class="href-link" href="#privacyProxyRequest">#</a>
         
             
                 <span class='tag'>async</span>
@@ -367,7 +367,7 @@ Require server information and return client instance.</div>
         
         <span class="code-name">
             
-                privacyProxy<span class="signature">(param)</span><span class="type-signature"> &rarr; {Promise.&lt;any>}</span>
+                privacyProxyRequest<span class="signature">(type, url, common<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;any>}</span>
             
         </span>
     </h4>
@@ -416,38 +416,6 @@ Require server information and return client instance.</div>
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>param</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">Object</code>
-
-
-  
-  </td>
-
-  
-      <td class="attributes">
-      
-
-      
-
-      
-      </td>
-  
-
-  
-
-  <td class="description last"></td>
-</tr>
-
-  
-  
-    
-<tr class="deep-level-1">
-  
       <td class="name"><code>type</code></td>
   
 
@@ -478,9 +446,11 @@ Require server information and return client instance.</div>
   <td class="description last">request body type</td>
 </tr>
 
-  
-    
-<tr class="deep-level-1">
+
+        
+
+            
+<tr class="deep-level-0">
   
       <td class="name"><code>url</code></td>
   
@@ -509,11 +479,13 @@ Require server information and return client instance.</div>
   <td class="description last">request url</td>
 </tr>
 
+
+        
+
+            
+<tr class="deep-level-0">
   
-    
-<tr class="deep-level-1">
-  
-      <td class="name"><code>method</code></td>
+      <td class="name"><code>param.method</code></td>
   
 
   <td class="type">
@@ -543,141 +515,11 @@ Require server information and return client instance.</div>
   <td class="description last">request method</td>
 </tr>
 
-  
-    
-<tr class="deep-level-1">
-  
-      <td class="name"><code>headers</code></td>
-  
 
-  <td class="type">
-  
-      
-<code class="param-type">any</code>
+        
 
-
-  
-  </td>
-
-  
-      <td class="attributes">
-      
-          &lt;optional><br>
-      
-
-      
-
-      
-      </td>
-  
-
-  
-
-  <td class="description last">request headers, use "_" prefix for encrypted column key and data id/token as value.</td>
-</tr>
-
-  
-    
-<tr class="deep-level-1">
-  
-      <td class="name"><code>params</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">any</code>
-
-
-  
-  </td>
-
-  
-      <td class="attributes">
-      
-          &lt;optional><br>
-      
-
-      
-
-      
-      </td>
-  
-
-  
-
-  <td class="description last">request parameters, use "_" prefix for encrypted column key and data id/token as value.</td>
-</tr>
-
-  
-    
-<tr class="deep-level-1">
-  
-      <td class="name"><code>body</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">any</code>
-
-
-  
-  </td>
-
-  
-      <td class="attributes">
-      
-          &lt;optional><br>
-      
-
-      
-
-      
-      </td>
-  
-
-  
-
-  <td class="description last">request body, use "_" prefix for encrypted column key and data id/token as value.</td>
-</tr>
-
-  
-    
-<tr class="deep-level-1">
-  
-      <td class="name"><code>query</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">any</code>
-
-
-  
-  </td>
-
-  
-      <td class="attributes">
-      
-          &lt;optional><br>
-      
-
-      
-
-      
-      </td>
-  
-
-  
-
-  <td class="description last">request query, use "_" prefix for encrypted column key and data id/token as value.</td>
-</tr>
-
-  
-    
-<tr class="deep-level-1">
+            
+<tr class="deep-level-0">
   
       <td class="name"><code>common</code></td>
   
@@ -685,7 +527,7 @@ Require server information and return client instance.</div>
   <td class="type">
   
       
-<code class="param-type">Object</code>
+<code class="param-type">object</code>
 
 
   
@@ -709,49 +551,17 @@ Require server information and return client instance.</div>
 </tr>
 
   
+  
     
 <tr class="deep-level-1">
   
-      <td class="name"><code>common.protections</code></td>
+      <td class="name"><code>vaults</code></td>
   
 
   <td class="type">
   
       
-<code class="param-type">Object</code>
-
-
-  
-  </td>
-
-  
-      <td class="attributes">
-      
-          &lt;optional><br>
-      
-
-      
-
-      
-      </td>
-  
-
-  
-
-  <td class="description last">protections object list. Define column with prefix as key and protectionId as value.</td>
-</tr>
-
-  
-    
-<tr class="deep-level-1">
-  
-      <td class="name"><code>common.vaults</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">Object</code>
+<code class="param-type">object</code>
 
 
   
@@ -778,13 +588,13 @@ Require server information and return client instance.</div>
     
 <tr class="deep-level-1">
   
-      <td class="name"><code>rootTag</code></td>
+      <td class="name"><code>protections</code></td>
   
 
   <td class="type">
   
       
-<code class="param-type">any</code>
+<code class="param-type">object</code>
 
 
   
@@ -804,10 +614,185 @@ Require server information and return client instance.</div>
 
   
 
-  <td class="description last"></td>
+  <td class="description last">protections object list. Define column with prefix as key and protectionId as value.</td>
 </tr>
 
   
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>options.headers</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">object</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last">request headers, use "_" prefix for encrypted column key and data id/token as value.</td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>options.params</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">object</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last">request parameters, use "_" prefix for encrypted column key and data id/token as value.</td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>options.body</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">object</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last">request body, use "_" prefix for encrypted column key and data id/token as value.</td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>options.query</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">object</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last">request query, use "_" prefix for encrypted column key and data id/token as value.</td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>options.rootTag</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+          &lt;optional><br>
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last">root tag, required for xml type</td>
+</tr>
 
 
         
@@ -906,38 +891,39 @@ Require server information and return client instance.</div>
     <h5>Example</h5>
     
     
-        <pre class="prettyprint"><code>client.privacyProxy({
-      type: "xml",
-      rootTag: "data",
-      url: "https://enskbwhbhec7l.x.pipedream.net/:_phone/:_salary",
-      method: "post",
-      headers: {
-        _email: "1",
-      },
-      params: {
-        _phone: "1",
-        _salary: "01GQEATT1Q3NKKDC3A2JSMN7ZJ",
-      },
-      body: {
-        name: "jhon daeng",
-        _email: "1",
-        _phone: "1",
-        _salary: "01GQEATT1Q3NKKDC3A2JSMN7ZJ",
-      },
-      query: {
-        id: "123456789",
-        _email: "1",
-      },
-      common: {
+        <pre class="prettyprint"><code>client.privacyProxyRequest(
+      "json",
+      "https://enskbwhbhec7l.x.pipedream.net/:_phone/:_salary",
+      "post",
+      {
         protections: {
-          _email: "124edec8-530e-4fd2-a04b-d4dc21ce625a",
-          _phone: "9f53aa3b-7214-436d-af9b-d2952be9f0c4",
+          _email: "124edec8-530e-4fd2-a04b-d4dc21ce625a", // email protection id
+          _phone: "9f53aa3b-7214-436d-af9b-d2952be9f0c4", // phone protection id
         },
         vaults: {
-          _salary: ["c5f9236d-aea0-46a5-a2fe-fb75c0596c87", "salary"],
+          _salary: ["c5f9236d-aea0-46a5-a2fe-fb75c0596c87", "salary"], // salary vault id &amp; column
         },
       },
-    })</code></pre>
+      {
+        headers: {
+          _email: "1", // email data id
+        },
+        params: {
+          _phone: "1", // email data id
+          _salary: "01GQEATT1Q3NKKDC3A2JSMN7ZJ", // salary vault token
+        },
+        body: {
+          name: "jhon daeng",
+          _email: "1", // email data id
+          _phone: "1", // phone data id
+          _salary: "01GQEATT1Q3NKKDC3A2JSMN7ZJ", salary vault token
+        },
+        query: {
+          id: "123456789",
+          _email: "1",
+        },
+      }
+    );</code></pre>
     
 
 
