@@ -212,16 +212,16 @@ export class Client {
   /** Begin secure channel.
    * @param {string} protectionId
    * @param {string} clientPublicKey client public key in base64 enconding
-   * @param {number} [ttl] time to live in minutes
+   * @param {number} ttl time to live in minutes
    * @return {Promise<{id: string, serverPublicKey: string}>} secure channel id and server public key
    * @example
-   * 	// decrypt data with id 1,2,3,4,5
+   * 	// begin secure channel
    * client.secureChannelBegin("yourProtectionId", "yourClientPublicKey", 5)
    */
   public async secureChannelBegin(
     protectionId: string,
     clientPublicKey: string,
-    ttl?: number
+    ttl: number
   ): Promise<{ id: string; serverPublicKey: string }> {
     const { data } = await this.#request(
       "POST",
@@ -239,8 +239,8 @@ export class Client {
    * @param {string} secureChannelId
    * @return {Promise<void>}
    * @example
-   * 	// decrypt data with id 1,2,3,4,5
-   * client.secureChannelCommit("yoursecureChannelId")
+   * 	// commit secure channel
+   * client.secureChannelCommit("yourSecureChannelId")
    */
   public async secureChannelCommit(secureChannelId: string): Promise<void> {
     await this.#request(
