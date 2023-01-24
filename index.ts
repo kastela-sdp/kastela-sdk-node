@@ -6,6 +6,7 @@ import semver from "semver";
 const expectedKastelaVersion = "v0.0";
 const vaultPath = "/api/vault";
 const protectionPath = "/api/protection";
+const secureChannelPath = "/api/secure-channel";
 
 type proxyCommon = {
   protections: Object;
@@ -302,5 +303,48 @@ export class Client {
       }
     );
     return data;
+  }
+  
+  /** Begin secure channel.
+   * @param {string} protectionId
+   * @param {string} clientPublicKey client public key in base64 enconding
+   * @param {number} ttl time to live in minutes
+   * @return {Promise<{id: string, serverPublicKey: string}>} secure channel id and server public key
+   * @example
+   * 	// begin secure channel
+   * client.secureChannelBegin("yourProtectionId", "yourClientPublicKey", 5)
+   */
+  public async secureChannelBegin(
+    protectionId: string,
+    clientPublicKey: string,
+    ttl: number
+  ): Promise<{ id: string; serverPublicKey: string }> {
+    const { data } = await this.#request(
+      "POST",
+      new URL(`${secureChannelPath}/begin`, this.#kastelaUrl),
+      {
+        protection_id: protectionId,
+        client_public_key: clientPublicKey,
+        ttl: ttl,
+      }
+    );
+    return { id: data.id, serverPublicKey: data.server_public_key };
+  }
+
+  /** Commit secure channel.
+   * @param {string} secureChannelId
+   * @return {Promise<void>}
+   * @example
+   * 	// commit secure channel
+   * client.secureChannelCommit("yourSecureChannelId")
+   */
+  public async secureChannelCommit(secureChannelId: string): Promise<void> {
+    await this.#request(
+      "POST",
+      new URL(
+        `${secureChannelPath}/${secureChannelId}/commit`,
+        this.#kastelaUrl
+      )
+    );
   }
 }
