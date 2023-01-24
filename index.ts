@@ -3,7 +3,7 @@ import fs from "fs";
 import https from "https";
 import semver from "semver";
 
-const expectedKastelaVersion = "v0.0";
+const expectedKastelaVersion = "v0.1";
 const vaultPath = "/api/vault";
 const protectionPath = "/api/protection";
 
@@ -80,7 +80,7 @@ export class Client {
    * @example
    * // store jhon doe and jane doe data
    * client.vaultStore("yourVaultId", [{name: "jhon doe", secret : "12345678"}, {name: "jane doe", secret : "12345678"}])
-   * 
+   *
    */
   public async vaultStore(vaultId: string, data: any[]): Promise<string[]> {
     const { ids } = await this.#request(
@@ -161,7 +161,7 @@ export class Client {
    * @param {string} vaultId
    * @param {string} token vault token
    * @return {Promise<void>}
-   * @example 
+   * @example
    * //delete vault with token '331787a5-8930-4167-828f-7e783aeb158c'
    * client.vaultDelete("yourVaultId", "331787a5-8930-4167-828f-7e783aeb158c")
    */
