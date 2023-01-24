@@ -268,10 +268,10 @@ export class Client {
     url: string,
     method: "get" | "post",
     common: {
-      protections: object,
-      vaults: object,
-    } = {protections: {}, vaults: {}},
-    options:{
+      protections: object;
+      vaults: object;
+    } = { protections: {}, vaults: {} },
+    options: {
       headers?: object;
       params?: object;
       body?: object;
@@ -314,7 +314,7 @@ export class Client {
     clientPublicKey: string,
     ttl: number
   ): Promise<{ id: string; serverPublicKey: string }> {
-    const { data } = await this.#request(
+    const { id, server_public_key: serverPublicKey } = await this.#request(
       "POST",
       new URL(`${secureChannelPath}/begin`, this.#kastelaUrl),
       {
@@ -323,7 +323,7 @@ export class Client {
         ttl: ttl,
       }
     );
-    return { id: data.id, serverPublicKey: data.server_public_key };
+    return { id, serverPublicKey };
   }
 
   /** Commit secure channel.
