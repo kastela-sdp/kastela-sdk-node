@@ -1,6 +1,6 @@
 {
   "name": "@kastela-sdp/kastela-sdk-node",
-  "version": "0.1.18",
+  "version": "0.2.0",
   "description": "Kastela Server SDK for Node.js",
   "main": "index.js",
   "scripts": {
@@ -30,9 +30,7 @@
   },
   "devDependencies": {
     "@tsconfig/node14": "~1.0.3",
-    "@types/chai": "~4.3.3",
     "@types/express": "~4.17.14",
-    "@types/mocha": "~10.0.0",
     "@types/node": "~18.11.2",
     "@types/semver": "~7.3.13",
     "better-docs": "^2.7.2",
@@ -40,7 +38,6 @@
     "chai-as-promised": "~7.1.1",
     "express": "~4.18.2",
     "jsdoc": "^4.0.0",
-    "mocha": "~10.1.0",
     "nodemon": "~2.0.20",
     "taffydb": "^2.7.3",
     "ts-node": "~10.9.1",

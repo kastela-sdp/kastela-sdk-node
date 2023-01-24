@@ -1,0 +1,27 @@
+name: publish-next
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          always-auth: true
+          registry-url: https://registry.npmjs.org
+          scope: '@kastela-sdp'
+      - run: npm ci
+      - run: npm run build
+      - run: git config --local user.name "Hash Rekayasa Teknologi"
+      - run: git config --local user.email "hello@hash.id"
+      - run: npm version prerelease --preid ${GITHUB_SHA::7}
+      - run: npm publish --tag next --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  
