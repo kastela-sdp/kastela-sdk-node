@@ -1,4 +1,4 @@
-name: publish-latest
+name: publish
 
 on:
   push:
@@ -23,7 +23,6 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - name: Build Docs
         run: npm run docs
-
       - name: Deploy Docs
         uses: peaceiris/actions-gh-pages@v3
         with:
