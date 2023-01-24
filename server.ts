@@ -86,7 +86,9 @@ app.post("/protection/:protectionId/open", async (req, res, next) => {
 
 app.post("/proxy", async (req, res, next) => {
   try {
-    const data = await client.privacyProxy(req.body);
+    const { type, url, method,common, options } =
+      req.body;
+    const data = await client.privacyProxyRequest(type, url, method, common, options);
     res.json(data);
   } catch (error) {
     next(error);

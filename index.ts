@@ -263,28 +263,20 @@ export class Client {
       },
     })
    */
-  public async privacyProxy({
-    type,
-    url,
-    method,
-    headers,
-    params,
-    body,
-    query,
-    common,
-    rootTag,
-  }: {
-    type: "json" | "xml";
-    url: string;
-    method: "get" | "post";
-    common: any;
-    headers?: any;
-    params?: any;
-    body?: any;
-    query?: any;
-    rootTag?: string;
-  }) {
-    if (type === "xml" && !rootTag) {
+  public async privacyProxyRequest(
+    type: "json" | "xml",
+    url: string,
+    method: "get" | "post",
+    common: any,
+    options:{
+      headers?: any;
+      params?: any;
+      body?: any;
+      query?: any;
+      rootTag?: string;
+    } = {}
+  ) {
+    if (type === "xml" && !options.rootTag) {
       throw new Error("rootTag is required for xml");
     }
     const data = await this.#request(
@@ -294,12 +286,12 @@ export class Client {
         type,
         url,
         method,
-        headers,
-        params,
-        body,
-        query,
         common,
-        rootTag,
+        headers: options.headers,
+        params: options.params,
+        body: options.body,
+        query: options.query,
+        rootTag: options.rootTag,
       }
     );
     return data;
