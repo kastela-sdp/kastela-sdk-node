@@ -216,63 +216,66 @@ export class Client {
 
   /**
    *  proxying your request.
-   * @param {Object} param
-   * @param {"json"|"xml"} param.type request body type
-   * @param {string} param.url request url
+   * @param {"json"|"xml"} type request body type
+   * @param {string} url request url
    * @param {"get"|"post"} param.method request method
-   * @param {any} [param.headers] request headers, use "_" prefix for encrypted column key and data id/token as value.
-   * @param {any} [param.params] request parameters, use "_" prefix for encrypted column key and data id/token as value.
-   * @param {any} [param.body] request body, use "_" prefix for encrypted column key and data id/token as value.
-   * @param {any} [param.query] request query, use "_" prefix for encrypted column key and data id/token as value.
-   * @param {Object} [param.common] needed information for protection and vault.
-   * @param {Object} [param.common.protections] protections object list. Define column with prefix as key and protectionId as value.
-   * @param {Object} [param.common.vaults] vaults object list. Define column with prefix as key and array with id as first index and vault column as second index.
-   * @param {any} [param.rootTag]
+   * @param {object} [common] needed information for protection and vault.
+   * @param {object} [common.vaults] vaults object list. Define column with prefix as key and array with id as first index and vault column as second index.
+   * @param {object} [common.protections] protections object list. Define column with prefix as key and protectionId as value.
+   * @param {object} [options.headers] request headers, use "_" prefix for encrypted column key and data id/token as value.
+   * @param {object} [options.params] request parameters, use "_" prefix for encrypted column key and data id/token as value.
+   * @param {object} [options.body] request body, use "_" prefix for encrypted column key and data id/token as value.
+   * @param {object} [options.query] request query, use "_" prefix for encrypted column key and data id/token as value.
+   * @param {string} [options.rootTag] root tag, required for xml type
    * @return {Promise<any>}
    * @example
-   * client.privacyProxy({
-      type: "xml",
-      rootTag: "data",
-      url: "https://enskbwhbhec7l.x.pipedream.net/:_phone/:_salary",
-      method: "post",
-      headers: {
-        _email: "1",
-      },
-      params: {
-        _phone: "1",
-        _salary: "01GQEATT1Q3NKKDC3A2JSMN7ZJ",
-      },
-      body: {
-        name: "jhon daeng",
-        _email: "1",
-        _phone: "1",
-        _salary: "01GQEATT1Q3NKKDC3A2JSMN7ZJ",
-      },
-      query: {
-        id: "123456789",
-        _email: "1",
-      },
-      common: {
+   *client.privacyProxyRequest(
+      "json",
+      "https://enskbwhbhec7l.x.pipedream.net/:_phone/:_salary",
+      "post",
+      {
         protections: {
-          _email: "124edec8-530e-4fd2-a04b-d4dc21ce625a",
-          _phone: "9f53aa3b-7214-436d-af9b-d2952be9f0c4",
+          _email: "124edec8-530e-4fd2-a04b-d4dc21ce625a", // email protection id
+          _phone: "9f53aa3b-7214-436d-af9b-d2952be9f0c4", // phone protection id
         },
         vaults: {
-          _salary: ["c5f9236d-aea0-46a5-a2fe-fb75c0596c87", "salary"],
+          _salary: ["c5f9236d-aea0-46a5-a2fe-fb75c0596c87", "salary"], // salary vault id & column
         },
       },
-    })
+      {
+        headers: {
+          _email: "1", // email data id
+        },
+        params: {
+          _phone: "1", // email data id
+          _salary: "01GQEATT1Q3NKKDC3A2JSMN7ZJ", // salary vault token
+        },
+        body: {
+          name: "jhon daeng",
+          _email: "1", // email data id
+          _phone: "1", // phone data id
+          _salary: "01GQEATT1Q3NKKDC3A2JSMN7ZJ", salary vault token
+        },
+        query: {
+          id: "123456789",
+          _email: "1",
+        },
+      }
+    );
    */
   public async privacyProxyRequest(
     type: "json" | "xml",
     url: string,
     method: "get" | "post",
-    common: any,
+    common: {
+      protections: object,
+      vaults: object,
+    } = {protections: {}, vaults: {}},
     options:{
-      headers?: any;
-      params?: any;
-      body?: any;
-      query?: any;
+      headers?: object;
+      params?: object;
+      body?: object;
+      query?: object;
       rootTag?: string;
     } = {}
   ) {
