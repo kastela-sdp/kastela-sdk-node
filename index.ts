@@ -3,7 +3,7 @@ import fs from "fs";
 import https from "https";
 import semver from "semver";
 
-const expectedKastelaVersion = "v0.0";
+const expectedKastelaVersion = "v0.1";
 const vaultPath = "/api/vault";
 const protectionPath = "/api/protection";
 const secureChannelPath = "/api/secure-channel";
