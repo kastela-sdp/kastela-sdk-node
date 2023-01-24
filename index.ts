@@ -3,7 +3,7 @@ import fs from "fs";
 import https from "https";
 import semver from "semver";
 
-const expectedKastelaVersion = "v0.1";
+const expectedKastelaVersion = "v0.2";
 const vaultPath = "/api/vault";
 const protectionPath = "/api/protection";
 const secureChannelPath = "/api/secure-channel";
@@ -304,7 +304,7 @@ export class Client {
     );
     return data;
   }
-  
+
   /** Begin secure channel.
    * @param {string} protectionId
    * @param {string} clientPublicKey client public key in base64 enconding
