@@ -8,6 +8,11 @@ const vaultPath = "/api/vault";
 const protectionPath = "/api/protection";
 const secureChannelPath = "/api/secure-channel";
 
+type proxyCommon = {
+  protections: Object;
+  vaults: Object;
+};
+
 /**
  * @class
  * Create a new Kastela Client instance for communicating with the server.
@@ -209,6 +214,97 @@ export class Client {
     return data;
   }
 
+  /**
+   *  proxying your request.
+   * @param {Object} param
+   * @param {"json"|"xml"} param.type request body type
+   * @param {string} param.url request url
+   * @param {"get"|"post"} param.method request method
+   * @param {any} [param.headers] request headers, use "_" prefix for encrypted column key and data id/token as value.
+   * @param {any} [param.params] request parameters, use "_" prefix for encrypted column key and data id/token as value.
+   * @param {any} [param.body] request body, use "_" prefix for encrypted column key and data id/token as value.
+   * @param {any} [param.query] request query, use "_" prefix for encrypted column key and data id/token as value.
+   * @param {Object} [param.common] needed information for protection and vault.
+   * @param {Object} [param.common.protections] protections object list. Define column with prefix as key and protectionId as value.
+   * @param {Object} [param.common.vaults] vaults object list. Define column with prefix as key and array with id as first index and vault column as second index.
+   * @param {any} [param.rootTag]
+   * @return {Promise<any>}
+   * @example
+   * client.privacyProxy({
+      type: "xml",
+      rootTag: "data",
+      url: "https://enskbwhbhec7l.x.pipedream.net/:_phone/:_salary",
+      method: "post",
+      headers: {
+        _email: "1",
+      },
+      params: {
+        _phone: "1",
+        _salary: "01GQEATT1Q3NKKDC3A2JSMN7ZJ",
+      },
+      body: {
+        name: "jhon daeng",
+        _email: "1",
+        _phone: "1",
+        _salary: "01GQEATT1Q3NKKDC3A2JSMN7ZJ",
+      },
+      query: {
+        id: "123456789",
+        _email: "1",
+      },
+      common: {
+        protections: {
+          _email: "124edec8-530e-4fd2-a04b-d4dc21ce625a",
+          _phone: "9f53aa3b-7214-436d-af9b-d2952be9f0c4",
+        },
+        vaults: {
+          _salary: ["c5f9236d-aea0-46a5-a2fe-fb75c0596c87", "salary"],
+        },
+      },
+    })
+   */
+  public async privacyProxy({
+    type,
+    url,
+    method,
+    headers,
+    params,
+    body,
+    query,
+    common,
+    rootTag,
+  }: {
+    type: "json" | "xml";
+    url: string;
+    method: "get" | "post";
+    common: any;
+    headers?: any;
+    params?: any;
+    body?: any;
+    query?: any;
+    rootTag?: string;
+  }) {
+    if (type === "xml" && !rootTag) {
+      throw new Error("rootTag is required for xml");
+    }
+    const data = await this.#request(
+      "POST",
+      new URL(`/api/proxy`, this.#kastelaUrl),
+      {
+        type,
+        url,
+        method,
+        headers,
+        params,
+        body,
+        query,
+        common,
+        rootTag,
+      }
+    );
+    return data;
+  }
+  
   /** Begin secure channel.
    * @param {string} protectionId
    * @param {string} clientPublicKey client public key in base64 enconding
