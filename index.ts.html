@@ -353,7 +353,7 @@ export class Client {
   public async privacyProxyRequest(
     type: "json" | "xml",
     url: string,
-    method: "get" | "post",
+    method: "get" | "post" | "put" | "delete" | "patch",
     common: {
       protections: object;
       vaults: object;
