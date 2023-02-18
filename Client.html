@@ -839,7 +839,7 @@ Require server information and return client instance.</div>
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line399">line 399</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line397">line 397</a>
             </span>
         </p>
     
@@ -1078,7 +1078,7 @@ Require server information and return client instance.</div>
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line346">line 346</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line344">line 344</a>
             </span>
         </p>
     
@@ -1288,7 +1288,7 @@ client.protectionOpen("yourProtectionId", [1,2,3,4,5])</code></pre>
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line334">line 334</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line332">line 332</a>
             </span>
         </p>
     
@@ -1342,241 +1342,6 @@ client.protectionOpen("yourProtectionId", [1,2,3,4,5])</code></pre>
     
         <pre class="prettyprint"><code>// protect data with id 1,2,3,4,5
 client.protectionSeal("yourProtectionId", [1,2,3,4,5])</code></pre>
-    
-
-
-</div>
-            
-                <div class="member">
-
-
-    
-    <h4 class="name" id="secureChannelBegin">
-        <a class="href-link" href="#secureChannelBegin">#</a>
-        
-            
-                <span class='tag'>async</span>
-            
-        
-        <span class="code-name">
-            
-                secureChannelBegin<span class="signature">(protectionId, clientPublicKey, ttl)</span><span class="type-signature"> &rarr; {Promise.&lt;{id: string, serverPublicKey: string}>}</span>
-            
-        </span>
-    </h4>
-    
-
-    
-    
-    <div class="description">
-        Begin secure channel.
-    </div>
-    
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-<div class="table-container">
-    <table class="params table">
-        <thead>
-        <tr>
-            
-            <th>Name</th>
-            
-
-            <th>Type</th>
-
-            
-
-            
-
-            <th class="last">Description</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>protectionId</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">string</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last"></td>
-</tr>
-
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>clientPublicKey</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">string</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last">client public key in base64 enconding</td>
-</tr>
-
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>ttl</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">number</code>
-
-
-  
-  </td>
-
-  
-
-  
-
-  <td class="description last">time to live in minutes</td>
-</tr>
-
-
-        
-        </tbody>
-    </table>
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    
-
-    
-
-    
-
-    
-        <p class="tag-source">
-            <a href="index.ts.html" class="button">View Source</a>
-            <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line412">line 412</a>
-            </span>
-        </p>
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class='columns method-parameter'>
-        <div class="column is-2"><label>Returns:</label></div>
-        <div class="column is-10">
-            
-                    
-
-<div class="columns">
-    
-    <div class='param-desc column is-7'>secure channel id and server public key</div>
-    
-    
-    <div class='column is-5 has-text-left'>
-        <label>Type: </label>
-        
-<code class="param-type">Promise.&lt;{id: string, serverPublicKey: string}></code>
-
-
-    </div>
-    
-</div>
-
-                
-        </div>
-    </div>
-
-
-
-
-    <h5>Example</h5>
-    
-    
-        <pre class="prettyprint"><code>// begin secure channel
-client.secureChannelBegin("yourProtectionId", "yourClientPublicKey", 5)</code></pre>
     
 
 
@@ -1706,7 +1471,7 @@ client.secureChannelBegin("yourProtectionId", "yourClientPublicKey", 5)</code></
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line423">line 423</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line420">line 420</a>
             </span>
         </p>
     
@@ -1760,6 +1525,216 @@ client.secureChannelBegin("yourProtectionId", "yourClientPublicKey", 5)</code></
     
         <pre class="prettyprint"><code>// commit secure channel
 client.secureChannelCommit("yourSecureChannelId")</code></pre>
+    
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="secureChannelInit">
+        <a class="href-link" href="#secureChannelInit">#</a>
+        
+            
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                secureChannelInit<span class="signature">(protectionId, ttl)</span><span class="type-signature"> &rarr; {Promise.&lt;{id: string, credential: string}>}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Initialize secure channel.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>protectionId</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>ttl</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">number</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">time to live in minutes</td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="index.ts.html" class="button">View Source</a>
+            <span>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line409">line 409</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'>secure channel id and credential</div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">Promise.&lt;{id: string, credential: string}></code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+    <h5>Example</h5>
+    
+    
+        <pre class="prettyprint"><code>// begin secure channel
+client.secureChannelInit("yourProtectionId", 5)</code></pre>
     
 
 
@@ -1914,7 +1889,7 @@ client.secureChannelCommit("yourSecureChannelId")</code></pre>
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line322">line 322</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line320">line 320</a>
             </span>
         </p>
     
@@ -2242,7 +2217,7 @@ client.vaultDelete("yourVaultId", "331787a5-8930-4167-828f-7e783aeb158c")</code>
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line287">line 287</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line285">line 285</a>
             </span>
         </p>
     
@@ -2450,7 +2425,7 @@ client.vaultFetch("yourVaultId", "jhon doe", {})</code></pre>
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line298">line 298</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line296">line 296</a>
             </span>
         </p>
     
@@ -2657,7 +2632,7 @@ client.vaultFetch("yourVaultId", "jhon doe", {})</code></pre>
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line272">line 272</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line270">line 270</a>
             </span>
         </p>
     
@@ -2892,7 +2867,7 @@ client.vaultStore("yourVaultId", [{name: "jhon doe", secret : "12345678"}, {name
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line310">line 310</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line308">line 308</a>
             </span>
         </p>
     

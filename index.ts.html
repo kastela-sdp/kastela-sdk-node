@@ -377,36 +377,33 @@ export class Client {
         url,
         method,
         common,
-        options
+        options,
       }
     );
     return data;
   }
 
-  /** Begin secure channel.
+  /** Initialize secure channel.
    * @param {string} protectionId
-   * @param {string} clientPublicKey client public key in base64 enconding
    * @param {number} ttl time to live in minutes
-   * @return {Promise&lt;{id: string, serverPublicKey: string}>} secure channel id and server public key
+   * @return {Promise&lt;{id: string, credential: string}>} secure channel id and credential
    * @example
    * 	// begin secure channel
-   * client.secureChannelBegin("yourProtectionId", "yourClientPublicKey", 5)
+   * client.secureChannelInit("yourProtectionId", 5)
    */
-  public async secureChannelBegin(
+  public async secureChannelInit(
     protectionId: string,
-    clientPublicKey: string,
     ttl: number
-  ): Promise&lt;{ id: string; serverPublicKey: string }> {
-    const { id, server_public_key: serverPublicKey } = await this.#request(
+  ): Promise&lt;{ id: string; credential: string }> {
+    const { id, credential } = await this.#request(
       "POST",
-      new URL(`${secureChannelPath}/begin`, this.#kastelaUrl),
+      new URL(`${secureChannelPath}/init`, this.#kastelaUrl),
       {
         protection_id: protectionId,
-        client_public_key: clientPublicKey,
         ttl: ttl,
       }
     );
-    return { id, serverPublicKey };
+    return { id, credential };
   }
 
   /** Commit secure channel.
@@ -419,10 +416,8 @@ export class Client {
   public async secureChannelCommit(secureChannelId: string): Promise&lt;void> {
     await this.#request(
       "POST",
-      new URL(
-        `${secureChannelPath}/${secureChannelId}/commit`,
-        this.#kastelaUrl
-      )
+      new URL(`${secureChannelPath}/commit`, this.#kastelaUrl),
+      { id: secureChannelId }
     );
   }
 }
