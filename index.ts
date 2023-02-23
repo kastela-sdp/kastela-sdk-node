@@ -214,6 +214,47 @@ export class Client {
     return data;
   }
 
+  /** Initialize secure channel.
+   * @param {string} operation secure channel operation mode
+   * @param {string[]} protectionIds array of protection id
+   * @param {number} ttl time to live in minutes
+   * @return {Promise<{ credential: string}>} secure channel credential
+   * @example
+   * 	// begin secure channel
+   * client.secureChannelInit(["yourProtectionId"], 5)
+   */
+  public async secureChannelInit(
+    operation: "READ" | "WRITE",
+    protectionIds: string[],
+    ttl: number
+  ): Promise<{ credential: string }> {
+    const { credential } = await this.#request(
+      "POST",
+      new URL(`${secureChannelPath}/init`, this.#kastelaUrl),
+      {
+        operation,
+        protection_ids: protectionIds,
+        ttl: ttl,
+      }
+    );
+    return { credential };
+  }
+
+  /** Commit secure channel.
+   * @param {string} credential
+   * @return {Promise<void>}
+   * @example
+   * 	// commit secure channel
+   * client.secureChannelCommit("yourCredential")
+   */
+  public async secureChannelCommit(credential: string): Promise<void> {
+    await this.#request(
+      "POST",
+      new URL(`${secureChannelPath}/commit`, this.#kastelaUrl),
+      { credential }
+    );
+  }
+
   /**
    *  proxying your request.
    * @param {"json"|"xml"} type request body type
@@ -294,43 +335,5 @@ export class Client {
       }
     );
     return data;
-  }
-
-  /** Initialize secure channel.
-   * @param {string} protectionId
-   * @param {number} ttl time to live in minutes
-   * @return {Promise<{id: string, credential: string}>} secure channel id and credential
-   * @example
-   * 	// begin secure channel
-   * client.secureChannelInit("yourProtectionId", 5)
-   */
-  public async secureChannelInit(
-    protectionId: string,
-    ttl: number
-  ): Promise<{ id: string; credential: string }> {
-    const { id, credential } = await this.#request(
-      "POST",
-      new URL(`${secureChannelPath}/init`, this.#kastelaUrl),
-      {
-        protection_id: protectionId,
-        ttl: ttl,
-      }
-    );
-    return { id, credential };
-  }
-
-  /** Commit secure channel.
-   * @param {string} secureChannelId
-   * @return {Promise<void>}
-   * @example
-   * 	// commit secure channel
-   * client.secureChannelCommit("yourSecureChannelId")
-   */
-  public async secureChannelCommit(secureChannelId: string): Promise<void> {
-    await this.#request(
-      "POST",
-      new URL(`${secureChannelPath}/commit`, this.#kastelaUrl),
-      { id: secureChannelId }
-    );
   }
 }
