@@ -1,6 +1,5 @@
 node_modules
 out
-*.crt
-*.key
+credentials
 *.js
 *.d.ts
