@@ -1351,8 +1351,8 @@ client.protectionSeal("yourProtectionId", [1,2,3,4,5])</code></pre>
 
 
     
-    <h4 class="name" id="secureChannelCommit">
-        <a class="href-link" href="#secureChannelCommit">#</a>
+    <h4 class="name" id="secureProtectionCommit">
+        <a class="href-link" href="#secureProtectionCommit">#</a>
         
             
                 <span class='tag'>async</span>
@@ -1360,7 +1360,7 @@ client.protectionSeal("yourProtectionId", [1,2,3,4,5])</code></pre>
         
         <span class="code-name">
             
-                secureChannelCommit<span class="signature">(credential)</span><span class="type-signature"> &rarr; {Promise.&lt;void>}</span>
+                secureProtectionCommit<span class="signature">(credential)</span><span class="type-signature"> &rarr; {Promise.&lt;void>}</span>
             
         </span>
     </h4>
@@ -1369,7 +1369,7 @@ client.protectionSeal("yourProtectionId", [1,2,3,4,5])</code></pre>
     
     
     <div class="description">
-        Commit secure channel.
+        Commit secure protection.
     </div>
     
 
@@ -1523,8 +1523,8 @@ client.protectionSeal("yourProtectionId", [1,2,3,4,5])</code></pre>
     <h5>Example</h5>
     
     
-        <pre class="prettyprint"><code>// commit secure channel
-client.secureChannelCommit("yourCredential")</code></pre>
+        <pre class="prettyprint"><code>// commit secure protection
+client.secureProtectionCommit("yourCredential")</code></pre>
     
 
 
@@ -1534,8 +1534,8 @@ client.secureChannelCommit("yourCredential")</code></pre>
 
 
     
-    <h4 class="name" id="secureChannelInit">
-        <a class="href-link" href="#secureChannelInit">#</a>
+    <h4 class="name" id="secureProtectionInit">
+        <a class="href-link" href="#secureProtectionInit">#</a>
         
             
                 <span class='tag'>async</span>
@@ -1543,7 +1543,7 @@ client.secureChannelCommit("yourCredential")</code></pre>
         
         <span class="code-name">
             
-                secureChannelInit<span class="signature">(operation, protectionIds, ttl)</span><span class="type-signature"> &rarr; {Promise.&lt;{credential: string}>}</span>
+                secureProtectionInit<span class="signature">(operation, protectionIds, ttl)</span><span class="type-signature"> &rarr; {Promise.&lt;{credential: string}>}</span>
             
         </span>
     </h4>
@@ -1552,7 +1552,7 @@ client.secureChannelCommit("yourCredential")</code></pre>
     
     
     <div class="description">
-        Initialize secure channel.
+        Initialize secure protection.
     </div>
     
 
@@ -1606,7 +1606,7 @@ client.secureChannelCommit("yourCredential")</code></pre>
 
   
 
-  <td class="description last">secure channel operation mode</td>
+  <td class="description last">secure protection operation mode</td>
 </tr>
 
 
@@ -1735,7 +1735,7 @@ client.secureChannelCommit("yourCredential")</code></pre>
 
 <div class="columns">
     
-    <div class='param-desc column is-7'>secure channel credential</div>
+    <div class='param-desc column is-7'>secure protection credential</div>
     
     
     <div class='column is-5 has-text-left'>
@@ -1758,8 +1758,8 @@ client.secureChannelCommit("yourCredential")</code></pre>
     <h5>Example</h5>
     
     
-        <pre class="prettyprint"><code>// begin secure channel
-client.secureChannelInit(["yourProtectionId"], 5)</code></pre>
+        <pre class="prettyprint"><code>// begin secure protection
+client.secureProtectionInit(["yourProtectionId"], 5)</code></pre>
     
 
 
