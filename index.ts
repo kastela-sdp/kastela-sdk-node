@@ -6,7 +6,7 @@ import semver from "semver";
 const expectedKastelaVersion = "v0.2";
 const vaultPath = "/api/vault";
 const protectionPath = "/api/protection";
-const secureChannelPath = "/api/secure-channel";
+const securePath = "/api/secure";
 
 type proxyCommon = {
   protections: Object;
@@ -214,23 +214,23 @@ export class Client {
     return data;
   }
 
-  /** Initialize secure channel.
-   * @param {string} operation secure channel operation mode
+  /** Initialize secure protection.
+   * @param {string} operation secure protection operation mode
    * @param {string[]} protectionIds array of protection id
    * @param {number} ttl time to live in minutes
-   * @return {Promise<{ credential: string}>} secure channel credential
+   * @return {Promise<{ credential: string}>} secure protection credential
    * @example
-   * 	// begin secure channel
-   * client.secureChannelInit(["yourProtectionId"], 5)
+   * 	// begin secure protection
+   * client.secureProtectionInit(["yourProtectionId"], 5)
    */
-  public async secureChannelInit(
+  public async secureProtectionInit(
     operation: "READ" | "WRITE",
     protectionIds: string[],
     ttl: number
   ): Promise<{ credential: string }> {
     const { credential } = await this.#request(
       "POST",
-      new URL(`${secureChannelPath}/init`, this.#kastelaUrl),
+      new URL(`${securePath}/protection/init`, this.#kastelaUrl),
       {
         operation,
         protection_ids: protectionIds,
@@ -240,17 +240,17 @@ export class Client {
     return { credential };
   }
 
-  /** Commit secure channel.
+  /** Commit secure protection.
    * @param {string} credential
    * @return {Promise<void>}
    * @example
-   * 	// commit secure channel
-   * client.secureChannelCommit("yourCredential")
+   * 	// commit secure protection
+   * client.secureProtectionCommit("yourCredential")
    */
-  public async secureChannelCommit(credential: string): Promise<void> {
+  public async secureProtectionCommit(credential: string): Promise<void> {
     await this.#request(
       "POST",
-      new URL(`${secureChannelPath}/commit`, this.#kastelaUrl),
+      new URL(`${securePath}/protection/commit`, this.#kastelaUrl),
       { credential }
     );
   }

@@ -84,22 +84,13 @@ app.post("/api/protection/:protectionId/open", async (req, res, next) => {
   }
 });
 
-app.post("/api/secure-channel/init", async (req, res, next) => {
+app.post("/api/secure/protection/init", async (req, res, next) => {
   try {
-    const data = await client.secureChannelInit(
+    const data = await client.secureProtectionInit(
       req.body.operation,
       req.body.protection_ids,
       req.body.ttl
     );
-    res.json(data);
-  } catch (error) {
-    next(error);
-  }
-});
-
-app.post("/api/secure-channel/commit", async (req, res, next) => {
-  try {
-    const data = await client.secureChannelCommit(req.body.credential);
     res.json(data);
   } catch (error) {
     next(error);
