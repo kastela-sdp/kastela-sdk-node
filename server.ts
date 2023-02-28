@@ -9,7 +9,7 @@ const client = new Client(
 );
 
 const app = express();
-app.use(express.json());
+app.use(express.json({ limit: 4 * 1024 * 1024 }));
 
 app.post("/api/vault/:vaultId/store", async (req, res, next) => {
   try {
@@ -66,18 +66,18 @@ app.delete("/api/vault/:vaultId/:token", async (req, res, next) => {
   }
 });
 
-app.post("/api/protection/:protectionId/seal", async (req, res, next) => {
+app.post("/api/protection/seal", async (req, res, next) => {
   try {
-    await client.protectionSeal(req.params.protectionId, req.body);
+    await client.protectionSeal(req.body);
     res.send("OK");
   } catch (error) {
     next(error);
   }
 });
 
-app.post("/api/protection/:protectionId/open", async (req, res, next) => {
+app.post("/api/protection/open", async (req, res, next) => {
   try {
-    const data = await client.protectionOpen(req.params.protectionId, req.body);
+    const data = await client.protectionOpen(req.body);
     res.json(data);
   } catch (error) {
     next(error);
