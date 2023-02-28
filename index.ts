@@ -185,8 +185,8 @@ export class Client {
 
   /** Encrypt protection data by primary keys.
    * @param {Object[]} input protection seal input data
-   * @param {string} input[].protection_id protection id
-   * @param {any[]} input[].primary_keys array of data primary keys
+   * @param {string} input[].protectionId protection id
+   * @param {any[]} input[].primaryKeys array of data primary keys
    * @return {Promise<void>}
    * @example
    * 	// protect data with priimary key 1,2,3,4,5
@@ -196,13 +196,16 @@ export class Client {
     await this.#request(
       "POST",
       new URL(`${protectionPath}/seal`, this.#kastelaUrl),
-      input
+      input.map((i) => ({
+        protection_id: i.protectionId,
+        primary_keys: i.primaryKeys,
+      }))
     );
   }
 
   /** Decrypt data protection by tokens.
    * @param {Object[]} input protection open input data
-   * @param {string} input[].protection_id protection id
+   * @param {string} input[].protectionId protection id
    * @param {any[]} input[].tokens array of tokens
    * @return {Promise<any[][]>} array of decrypted data. the order of data corresponds to the order of input.
    * @example
@@ -213,7 +216,10 @@ export class Client {
     const { data } = await this.#request(
       "POST",
       new URL(`${protectionPath}/open`, this.#kastelaUrl),
-      input
+      input.map((i) => ({
+        protection_id: i.protectionId,
+        tokens: i.tokens,
+      }))
     );
     return data;
   }
