@@ -184,7 +184,9 @@ export class Client {
   }
 
   /** Encrypt protection data by primary keys.
-   * @param {{protection_id:string,primary_keys:any[]}[]} input array of protection id and primary keys
+   * @param {Object[]} input protection seal input data
+   * @param {string} input[].protection_id protection id
+   * @param {any[]} input[].primary_keys array of data primary keys
    * @return {Promise<void>}
    * @example
    * 	// protect data with priimary key 1,2,3,4,5
@@ -199,7 +201,9 @@ export class Client {
   }
 
   /** Decrypt data protection by tokens.
-   * @param {{protection_id:string,tokens:any[]}[]} input array of protection id and tokens
+   * @param {Object[]} input protection open input data
+   * @param {string} input[].protection_id protection id
+   * @param {any[]} input[].tokens array of tokens
    * @return {Promise<any[][]>} array of decrypted data. the order of data corresponds to the order of input.
    * @example
    * 	// decrypt data with id 1,2,3,4,5
