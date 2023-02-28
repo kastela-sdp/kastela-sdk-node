@@ -839,7 +839,7 @@ Require server information and return client instance.</div>
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line423">line 423</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line428">line 428</a>
             </span>
         </p>
     
@@ -942,7 +942,7 @@ Require server information and return client instance.</div>
         
         <span class="code-name">
             
-                protectionOpen<span class="signature">(protectionId, ids)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;any>>}</span>
+                protectionOpen<span class="signature">(input)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;Array.&lt;any>>>}</span>
             
         </span>
     </h4>
@@ -951,7 +951,7 @@ Require server information and return client instance.</div>
     
     
     <div class="description">
-        Decrypt data protection by protection data ids.
+        Decrypt data protection by tokens.
     </div>
     
 
@@ -989,7 +989,31 @@ Require server information and return client instance.</div>
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>protectionId</code></td>
+      <td class="name"><code>input</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Array.&lt;Object></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">protection open input data</td>
+</tr>
+
+  
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>protection_id</code></td>
   
 
   <td class="type">
@@ -1005,16 +1029,14 @@ Require server information and return client instance.</div>
 
   
 
-  <td class="description last"></td>
+  <td class="description last">protection id</td>
 </tr>
 
-
-        
-
-            
-<tr class="deep-level-0">
   
-      <td class="name"><code>ids</code></td>
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>tokens</code></td>
   
 
   <td class="type">
@@ -1030,8 +1052,10 @@ Require server information and return client instance.</div>
 
   
 
-  <td class="description last">array of protection data ids</td>
+  <td class="description last">array of tokens</td>
 </tr>
+
+  
 
 
         
@@ -1078,7 +1102,7 @@ Require server information and return client instance.</div>
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line346">line 346</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line351">line 351</a>
             </span>
         </p>
     
@@ -1109,13 +1133,13 @@ Require server information and return client instance.</div>
 
 <div class="columns">
     
-    <div class='param-desc column is-7'>array of decrypted data refers to ids</div>
+    <div class='param-desc column is-7'>array of decrypted data. the order of data corresponds to the order of input.</div>
     
     
     <div class='column is-5 has-text-left'>
         <label>Type: </label>
         
-<code class="param-type">Promise.&lt;Array.&lt;any>></code>
+<code class="param-type">Promise.&lt;Array.&lt;Array.&lt;any>>></code>
 
 
     </div>
@@ -1133,7 +1157,7 @@ Require server information and return client instance.</div>
     
     
         <pre class="prettyprint"><code>// decrypt data with id 1,2,3,4,5
-client.protectionOpen("yourProtectionId", [1,2,3,4,5])</code></pre>
+client.protectionOpen({"protection_id":"yourProtectionId",tokens:[a,b,c,d,e]})</code></pre>
     
 
 
@@ -1152,7 +1176,7 @@ client.protectionOpen("yourProtectionId", [1,2,3,4,5])</code></pre>
         
         <span class="code-name">
             
-                protectionSeal<span class="signature">(protectionId, ids)</span><span class="type-signature"> &rarr; {Promise.&lt;void>}</span>
+                protectionSeal<span class="signature">(input)</span><span class="type-signature"> &rarr; {Promise.&lt;void>}</span>
             
         </span>
     </h4>
@@ -1161,7 +1185,7 @@ client.protectionOpen("yourProtectionId", [1,2,3,4,5])</code></pre>
     
     
     <div class="description">
-        Encrypt data protection by protection data ids, which can be used after storing data or updating data.
+        Encrypt protection data by primary keys.
     </div>
     
 
@@ -1199,7 +1223,31 @@ client.protectionOpen("yourProtectionId", [1,2,3,4,5])</code></pre>
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>protectionId</code></td>
+      <td class="name"><code>input</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Array.&lt;Object></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">protection seal input data</td>
+</tr>
+
+  
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>protection_id</code></td>
   
 
   <td class="type">
@@ -1215,16 +1263,14 @@ client.protectionOpen("yourProtectionId", [1,2,3,4,5])</code></pre>
 
   
 
-  <td class="description last"></td>
+  <td class="description last">protection id</td>
 </tr>
 
-
-        
-
-            
-<tr class="deep-level-0">
   
-      <td class="name"><code>ids</code></td>
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>primary_keys</code></td>
   
 
   <td class="type">
@@ -1240,8 +1286,10 @@ client.protectionOpen("yourProtectionId", [1,2,3,4,5])</code></pre>
 
   
 
-  <td class="description last">array of protection data ids</td>
+  <td class="description last">array of data primary keys</td>
 </tr>
+
+  
 
 
         
@@ -1288,7 +1336,7 @@ client.protectionOpen("yourProtectionId", [1,2,3,4,5])</code></pre>
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line334">line 334</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line338">line 338</a>
             </span>
         </p>
     
@@ -1340,8 +1388,8 @@ client.protectionOpen("yourProtectionId", [1,2,3,4,5])</code></pre>
     <h5>Example</h5>
     
     
-        <pre class="prettyprint"><code>// protect data with id 1,2,3,4,5
-client.protectionSeal("yourProtectionId", [1,2,3,4,5])</code></pre>
+        <pre class="prettyprint"><code>// protect data with priimary key 1,2,3,4,5
+client.protectionSeal([{"protection_id":"yourProtectionId","primary_keys":[1,2,3,4,5]}])</code></pre>
     
 
 
@@ -1471,7 +1519,7 @@ client.protectionSeal("yourProtectionId", [1,2,3,4,5])</code></pre>
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line370">line 370</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line375">line 375</a>
             </span>
         </p>
     
@@ -1704,7 +1752,7 @@ client.secureProtectionCommit("yourCredential")</code></pre>
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line359">line 359</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line364">line 364</a>
             </span>
         </p>
     
@@ -1914,7 +1962,7 @@ client.secureProtectionInit(["yourProtectionId"], 5)</code></pre>
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line322">line 322</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line325">line 325</a>
             </span>
         </p>
     
@@ -2242,7 +2290,7 @@ client.vaultDelete("yourVaultId", "331787a5-8930-4167-828f-7e783aeb158c")</code>
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line287">line 287</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line290">line 290</a>
             </span>
         </p>
     
@@ -2450,7 +2498,7 @@ client.vaultFetch("yourVaultId", "jhon doe", {})</code></pre>
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line298">line 298</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line301">line 301</a>
             </span>
         </p>
     
@@ -2657,7 +2705,7 @@ client.vaultFetch("yourVaultId", "jhon doe", {})</code></pre>
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line272">line 272</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line275">line 275</a>
             </span>
         </p>
     
@@ -2892,7 +2940,7 @@ client.vaultStore("yourVaultId", [{name: "jhon doe", secret : "12345678"}, {name
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line310">line 310</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line313">line 313</a>
             </span>
         </p>
     
