@@ -839,7 +839,7 @@ Require server information and return client instance.</div>
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line434">line 434</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line431">line 431</a>
             </span>
         </p>
     
@@ -951,7 +951,7 @@ Require server information and return client instance.</div>
     
     
     <div class="description">
-        Decrypt data protection by tokens.
+        Decrypt protection data
     </div>
     
 
@@ -1013,7 +1013,7 @@ Require server information and return client instance.</div>
     
 <tr class="deep-level-1">
   
-      <td class="name"><code>protectionId</code></td>
+      <td class="name"><code>protectionID</code></td>
   
 
   <td class="type">
@@ -1102,7 +1102,7 @@ Require server information and return client instance.</div>
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line357">line 357</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line356">line 356</a>
             </span>
         </p>
     
@@ -1156,8 +1156,7 @@ Require server information and return client instance.</div>
     <h5>Example</h5>
     
     
-        <pre class="prettyprint"><code>// decrypt data with id 1,2,3,4,5
-client.protectionOpen({"protection_id":"yourProtectionId",tokens:[a,b,c,d,e]})</code></pre>
+        <pre class="prettyprint"><code>const data = await client.protectionOpen({ protectionID: "your-protection-id" ,tokens: ["a", "b", "c", "d", "e"]})</code></pre>
     
 
 
@@ -1185,7 +1184,7 @@ client.protectionOpen({"protection_id":"yourProtectionId",tokens:[a,b,c,d,e]})</
     
     
     <div class="description">
-        Encrypt protection data by primary keys.
+        Encrypt protection data
     </div>
     
 
@@ -1247,7 +1246,7 @@ client.protectionOpen({"protection_id":"yourProtectionId",tokens:[a,b,c,d,e]})</
     
 <tr class="deep-level-1">
   
-      <td class="name"><code>protectionId</code></td>
+      <td class="name"><code>protectionID</code></td>
   
 
   <td class="type">
@@ -1388,8 +1387,7 @@ client.protectionOpen({"protection_id":"yourProtectionId",tokens:[a,b,c,d,e]})</
     <h5>Example</h5>
     
     
-        <pre class="prettyprint"><code>// protect data with priimary key 1,2,3,4,5
-client.protectionSeal([{"protection_id":"yourProtectionId","primary_keys":[1,2,3,4,5]}])</code></pre>
+        <pre class="prettyprint"><code>await client.protectionSeal([{ protectionID: "your-protection-id", primaryKeys: [1, 2, 3, 4, 5]}])</code></pre>
     
 
 
@@ -1519,7 +1517,7 @@ client.protectionSeal([{"protection_id":"yourProtectionId","primary_keys":[1,2,3
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line381">line 381</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line378">line 378</a>
             </span>
         </p>
     
@@ -1571,8 +1569,7 @@ client.protectionSeal([{"protection_id":"yourProtectionId","primary_keys":[1,2,3
     <h5>Example</h5>
     
     
-        <pre class="prettyprint"><code>// commit secure protection
-client.secureProtectionCommit("yourCredential")</code></pre>
+        <pre class="prettyprint"><code>await client.secureProtectionCommit("your-credential")</code></pre>
     
 
 
@@ -1591,7 +1588,7 @@ client.secureProtectionCommit("yourCredential")</code></pre>
         
         <span class="code-name">
             
-                secureProtectionInit<span class="signature">(operation, protectionIds, ttl)</span><span class="type-signature"> &rarr; {Promise.&lt;{credential: string}>}</span>
+                secureProtectionInit<span class="signature">(operation, protectionIDs, ttl)</span><span class="type-signature"> &rarr; {Promise.&lt;{credential: string}>}</span>
             
         </span>
     </h4>
@@ -1663,7 +1660,7 @@ client.secureProtectionCommit("yourCredential")</code></pre>
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>protectionIds</code></td>
+      <td class="name"><code>protectionIDs</code></td>
   
 
   <td class="type">
@@ -1752,7 +1749,7 @@ client.secureProtectionCommit("yourCredential")</code></pre>
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line370">line 370</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line368">line 368</a>
             </span>
         </p>
     
@@ -1806,8 +1803,7 @@ client.secureProtectionCommit("yourCredential")</code></pre>
     <h5>Example</h5>
     
     
-        <pre class="prettyprint"><code>// begin secure protection
-client.secureProtectionInit(["yourProtectionId"], 5)</code></pre>
+        <pre class="prettyprint"><code>const { credential } = await client.secureProtectionInit(["your-protection-id"], 5)</code></pre>
     
 
 
@@ -1826,7 +1822,7 @@ client.secureProtectionInit(["yourProtectionId"], 5)</code></pre>
         
         <span class="code-name">
             
-                vaultDelete<span class="signature">(vaultId, token)</span><span class="type-signature"> &rarr; {Promise.&lt;void>}</span>
+                vaultDelete<span class="signature">(input)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;Array.&lt;any>>>}</span>
             
         </span>
     </h4>
@@ -1835,7 +1831,7 @@ client.secureProtectionInit(["yourProtectionId"], 5)</code></pre>
     
     
     <div class="description">
-        Remove vault data by vault token.
+        Delete vault data
     </div>
     
 
@@ -1873,13 +1869,13 @@ client.secureProtectionInit(["yourProtectionId"], 5)</code></pre>
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>vaultId</code></td>
+      <td class="name"><code>input</code></td>
   
 
   <td class="type">
   
       
-<code class="param-type">string</code>
+<code class="param-type">Array.&lt;Object></code>
 
 
   
@@ -1892,13 +1888,12 @@ client.secureProtectionInit(["yourProtectionId"], 5)</code></pre>
   <td class="description last"></td>
 </tr>
 
-
-        
-
-            
-<tr class="deep-level-0">
   
-      <td class="name"><code>token</code></td>
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>vaultID</code></td>
   
 
   <td class="type">
@@ -1914,8 +1909,33 @@ client.secureProtectionInit(["yourProtectionId"], 5)</code></pre>
 
   
 
-  <td class="description last">vault token</td>
+  <td class="description last">vault id</td>
 </tr>
+
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>tokens</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Array.&lt;string></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">array of tokens</td>
+</tr>
+
+  
 
 
         
@@ -1962,7 +1982,7 @@ client.secureProtectionInit(["yourProtectionId"], 5)</code></pre>
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line331">line 331</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line332">line 332</a>
             </span>
         </p>
     
@@ -1997,7 +2017,7 @@ client.secureProtectionInit(["yourProtectionId"], 5)</code></pre>
     <div class='column is-5 has-text-left'>
         <label>Type: </label>
         
-<code class="param-type">Promise.&lt;void></code>
+<code class="param-type">Promise.&lt;Array.&lt;Array.&lt;any>>></code>
 
 
     </div>
@@ -2014,8 +2034,7 @@ client.secureProtectionInit(["yourProtectionId"], 5)</code></pre>
     <h5>Example</h5>
     
     
-        <pre class="prettyprint"><code>//delete vault with token '331787a5-8930-4167-828f-7e783aeb158c'
-client.vaultDelete("yourVaultId", "331787a5-8930-4167-828f-7e783aeb158c")</code></pre>
+        <pre class="prettyprint"><code>await client.vaultDelete([{ vaultID: "your-vault-id", tokens: ["d", "e"]}])</code></pre>
     
 
 
@@ -2034,7 +2053,7 @@ client.vaultDelete("yourVaultId", "331787a5-8930-4167-828f-7e783aeb158c")</code>
         
         <span class="code-name">
             
-                vaultFetch<span class="signature">(vaultId, search, params)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;string>>}</span>
+                vaultFetch<span class="signature">(input)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;string>>}</span>
             
         </span>
     </h4>
@@ -2083,7 +2102,39 @@ client.vaultDelete("yourVaultId", "331787a5-8930-4167-828f-7e783aeb158c")</code>
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>vaultId</code></td>
+      <td class="name"><code>input</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Object</code>
+
+
+  
+  </td>
+
+  
+      <td class="attributes">
+      
+
+      
+
+      
+      </td>
+  
+
+  
+
+  <td class="description last">input</td>
+</tr>
+
+  
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>vaultID</code></td>
   
 
   <td class="type">
@@ -2107,14 +2158,12 @@ client.vaultDelete("yourVaultId", "331787a5-8930-4167-828f-7e783aeb158c")</code>
 
   
 
-  <td class="description last"></td>
+  <td class="description last">vault id</td>
 </tr>
 
-
-        
-
-            
-<tr class="deep-level-0">
+  
+    
+<tr class="deep-level-1">
   
       <td class="name"><code>search</code></td>
   
@@ -2143,40 +2192,6 @@ client.vaultDelete("yourVaultId", "331787a5-8930-4167-828f-7e783aeb158c")</code>
   <td class="description last">indexed column value</td>
 </tr>
 
-
-        
-
-            
-<tr class="deep-level-0">
-  
-      <td class="name"><code>params</code></td>
-  
-
-  <td class="type">
-  
-      
-<code class="param-type">Object</code>
-
-
-  
-  </td>
-
-  
-      <td class="attributes">
-      
-
-      
-
-      
-      </td>
-  
-
-  
-
-  <td class="description last">pagination parameters</td>
-</tr>
-
-  
   
     
 <tr class="deep-level-1">
@@ -2207,7 +2222,7 @@ client.vaultDelete("yourVaultId", "331787a5-8930-4167-828f-7e783aeb158c")</code>
 
   
 
-  <td class="description last">pagination size</td>
+  <td class="description last">pagination limit</td>
 </tr>
 
   
@@ -2220,7 +2235,7 @@ client.vaultDelete("yourVaultId", "331787a5-8930-4167-828f-7e783aeb158c")</code>
   <td class="type">
   
       
-<code class="param-type">string</code>
+<code class="param-type">number</code>
 
 
   
@@ -2240,7 +2255,7 @@ client.vaultDelete("yourVaultId", "331787a5-8930-4167-828f-7e783aeb158c")</code>
 
   
 
-  <td class="description last">pagination offset</td>
+  <td class="description last">pagination after</td>
 </tr>
 
   
@@ -2290,7 +2305,7 @@ client.vaultDelete("yourVaultId", "331787a5-8930-4167-828f-7e783aeb158c")</code>
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line296">line 296</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line294">line 294</a>
             </span>
         </p>
     
@@ -2342,8 +2357,7 @@ client.vaultDelete("yourVaultId", "331787a5-8930-4167-828f-7e783aeb158c")</code>
     <h5>Example</h5>
     
     
-        <pre class="prettyprint"><code>// search "jhon doe" data
-client.vaultFetch("yourVaultId", "jhon doe", {})</code></pre>
+        <pre class="prettyprint"><code>const tokens = await client.vaultFetch({ vaultID: "your-vault-id", search: "bob", size: 10, after: "token" })</code></pre>
     
 
 
@@ -2362,7 +2376,7 @@ client.vaultFetch("yourVaultId", "jhon doe", {})</code></pre>
         
         <span class="code-name">
             
-                vaultGet<span class="signature">(vaultId, ids)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;any>>}</span>
+                vaultGet<span class="signature">(input)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;Array.&lt;any>>>}</span>
             
         </span>
     </h4>
@@ -2371,7 +2385,7 @@ client.vaultFetch("yourVaultId", "jhon doe", {})</code></pre>
     
     
     <div class="description">
-        Get batch vault data by vault token ids.
+        Get vault data
     </div>
     
 
@@ -2409,7 +2423,31 @@ client.vaultFetch("yourVaultId", "jhon doe", {})</code></pre>
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>vaultId</code></td>
+      <td class="name"><code>input</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Array.&lt;Object></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+  
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>vaultID</code></td>
   
 
   <td class="type">
@@ -2425,16 +2463,14 @@ client.vaultFetch("yourVaultId", "jhon doe", {})</code></pre>
 
   
 
-  <td class="description last"></td>
+  <td class="description last">vault id</td>
 </tr>
 
-
-        
-
-            
-<tr class="deep-level-0">
   
-      <td class="name"><code>ids</code></td>
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>tokens</code></td>
   
 
   <td class="type">
@@ -2450,8 +2486,10 @@ client.vaultFetch("yourVaultId", "jhon doe", {})</code></pre>
 
   
 
-  <td class="description last">array of vault token</td>
+  <td class="description last">array of tokens</td>
 </tr>
+
+  
 
 
         
@@ -2498,7 +2536,7 @@ client.vaultFetch("yourVaultId", "jhon doe", {})</code></pre>
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line307">line 307</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line306">line 306</a>
             </span>
         </p>
     
@@ -2533,7 +2571,7 @@ client.vaultFetch("yourVaultId", "jhon doe", {})</code></pre>
     <div class='column is-5 has-text-left'>
         <label>Type: </label>
         
-<code class="param-type">Promise.&lt;Array.&lt;any>></code>
+<code class="param-type">Promise.&lt;Array.&lt;Array.&lt;any>>></code>
 
 
     </div>
@@ -2550,7 +2588,7 @@ client.vaultFetch("yourVaultId", "jhon doe", {})</code></pre>
     <h5>Example</h5>
     
     
-        <pre class="prettyprint"><code>client.VaultGet("yourVaultId", []string{"d2657324-59f3-4bd4-92b0-c7f5e5ef7269", "331787a5-8930-4167-828f-7e783aeb158c"})</code></pre>
+        <pre class="prettyprint"><code>const values = await client.VaultGet([{ vaultID: "your-vault-id", tokens: ["a", "b", "c", "d", "e"]}]);</code></pre>
     
 
 
@@ -2569,7 +2607,7 @@ client.vaultFetch("yourVaultId", "jhon doe", {})</code></pre>
         
         <span class="code-name">
             
-                vaultStore<span class="signature">(vaultId, data)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;string>>}</span>
+                vaultStore<span class="signature">(input)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;Array.&lt;string>>>}</span>
             
         </span>
     </h4>
@@ -2578,7 +2616,7 @@ client.vaultFetch("yourVaultId", "jhon doe", {})</code></pre>
     
     
     <div class="description">
-        Store batch vault data on the server.
+        Store vault data
     </div>
     
 
@@ -2616,7 +2654,31 @@ client.vaultFetch("yourVaultId", "jhon doe", {})</code></pre>
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>vaultId</code></td>
+      <td class="name"><code>input</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Array.&lt;Object></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">input</td>
+</tr>
+
+  
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>vaultID</code></td>
   
 
   <td class="type">
@@ -2632,16 +2694,14 @@ client.vaultFetch("yourVaultId", "jhon doe", {})</code></pre>
 
   
 
-  <td class="description last"></td>
+  <td class="description last">vault id</td>
 </tr>
 
-
-        
-
-            
-<tr class="deep-level-0">
   
-      <td class="name"><code>data</code></td>
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>values</code></td>
   
 
   <td class="type">
@@ -2659,6 +2719,8 @@ client.vaultFetch("yourVaultId", "jhon doe", {})</code></pre>
 
   <td class="description last">array of vault data</td>
 </tr>
+
+  
 
 
         
@@ -2705,7 +2767,7 @@ client.vaultFetch("yourVaultId", "jhon doe", {})</code></pre>
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line281">line 281</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line280">line 280</a>
             </span>
         </p>
     
@@ -2736,13 +2798,13 @@ client.vaultFetch("yourVaultId", "jhon doe", {})</code></pre>
 
 <div class="columns">
     
-    <div class='param-desc column is-7'>array of vault token</div>
+    <div class='param-desc column is-7'>array of vault token. the order of token corresponds to the order of input.</div>
     
     
     <div class='column is-5 has-text-left'>
         <label>Type: </label>
         
-<code class="param-type">Promise.&lt;Array.&lt;string>></code>
+<code class="param-type">Promise.&lt;Array.&lt;Array.&lt;string>>></code>
 
 
     </div>
@@ -2759,8 +2821,7 @@ client.vaultFetch("yourVaultId", "jhon doe", {})</code></pre>
     <h5>Example</h5>
     
     
-        <pre class="prettyprint"><code>// store jhon doe and jane doe data
-client.vaultStore("yourVaultId", [{name: "jhon doe", secret : "12345678"}, {name: "jane doe", secret : "12345678"}])</code></pre>
+        <pre class="prettyprint"><code>const tokens = await client.vaultStore([{ vaultID: "your-vault-id", values: [{name: "alice", secret: 123 }, { name: "bob", secret: 456 }]}]);</code></pre>
     
 
 
@@ -2779,7 +2840,7 @@ client.vaultStore("yourVaultId", [{name: "jhon doe", secret : "12345678"}, {name
         
         <span class="code-name">
             
-                vaultUpdate<span class="signature">(vaultId, token, data)</span><span class="type-signature"> &rarr; {Promise.&lt;void>}</span>
+                vaultUpdate<span class="signature">(input)</span><span class="type-signature"> &rarr; {Promise.&lt;void>}</span>
             
         </span>
     </h4>
@@ -2788,7 +2849,7 @@ client.vaultStore("yourVaultId", [{name: "jhon doe", secret : "12345678"}, {name
     
     
     <div class="description">
-        Update vault data by vault token.
+        Update vault data
     </div>
     
 
@@ -2826,7 +2887,31 @@ client.vaultStore("yourVaultId", [{name: "jhon doe", secret : "12345678"}, {name
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>vaultId</code></td>
+      <td class="name"><code>input</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Array.&lt;Object></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+  
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>vaultID</code></td>
   
 
   <td class="type">
@@ -2842,22 +2927,20 @@ client.vaultStore("yourVaultId", [{name: "jhon doe", secret : "12345678"}, {name
 
   
 
-  <td class="description last"></td>
+  <td class="description last">vault id</td>
 </tr>
 
-
-        
-
-            
-<tr class="deep-level-0">
   
-      <td class="name"><code>token</code></td>
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>values</code></td>
   
 
   <td class="type">
   
       
-<code class="param-type">Array.&lt;string></code>
+<code class="param-type">Array.&lt;Object></code>
 
 
   
@@ -2867,16 +2950,37 @@ client.vaultStore("yourVaultId", [{name: "jhon doe", secret : "12345678"}, {name
 
   
 
-  <td class="description last">vault token</td>
+  <td class="description last">array of values</td>
 </tr>
 
-
-        
-
-            
-<tr class="deep-level-0">
   
-      <td class="name"><code>data</code></td>
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>values[].token</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">token</td>
+</tr>
+
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>values[].value</code></td>
   
 
   <td class="type">
@@ -2892,8 +2996,10 @@ client.vaultStore("yourVaultId", [{name: "jhon doe", secret : "12345678"}, {name
 
   
 
-  <td class="description last">update data</td>
+  <td class="description last">value</td>
 </tr>
+
+  
 
 
         
@@ -2940,7 +3046,7 @@ client.vaultStore("yourVaultId", [{name: "jhon doe", secret : "12345678"}, {name
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line319">line 319</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line320">line 320</a>
             </span>
         </p>
     
@@ -2992,7 +3098,7 @@ client.vaultStore("yourVaultId", [{name: "jhon doe", secret : "12345678"}, {name
     <h5>Example</h5>
     
     
-        <pre class="prettyprint"><code>client.vaultUpdate("yourVaultId", "331787a5-8930-4167-828f-7e783aeb158c", {name: "jane d'arc", secret : "12345678"})</code></pre>
+        <pre class="prettyprint"><code>await client.vaultUpdate([{ vaultID: "your-vault-id", values: [{ token: "c", value: { name: "carol", secret: 789 }}]}])</code></pre>
     
 
 
