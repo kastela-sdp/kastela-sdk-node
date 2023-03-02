@@ -1,4 +1,11 @@
-import { Client } from "./index";
+import {
+  Client,
+  vaultStoreInput,
+  vaultGetInput,
+  vaultUpdateInput,
+  vaultDeleteInput,
+  vaultFetchInput,
+} from "./index";
 import express, { NextFunction, Request, Response } from "express";
 
 const client = new Client(
@@ -11,55 +18,82 @@ const client = new Client(
 const app = express();
 app.use(express.json({ limit: 4 * 1024 * 1024 }));
 
-app.post("/api/vault/:vaultId/store", async (req, res, next) => {
+app.post("/api/vault/store", async (req, res, next) => {
   try {
-    const ids = await client.vaultStore(req.params.vaultId, req.body);
+    const input: vaultStoreInput[] = req.body.map(
+      (storeInput: { vault_id: string; values: string[] }) => ({
+        vaultID: storeInput.vault_id,
+        values: storeInput.values,
+      })
+    );
+    const ids = await client.vaultStore(input);
     res.send(ids);
   } catch (error) {
     next(error);
   }
 });
 
-app.get("/api/vault/:vaultId", async (req, res, next) => {
+app.post("/api/vault/fetch", async (req, res, next) => {
   try {
-    if (!req.query.search) {
-      throw new Error("search not found in query parameter");
+    const input: vaultFetchInput = {
+      vaultID: req.body.vault_id,
+      search: req.body.search,
+    };
+    if (req.body.size) {
+      input.size = req.body.size;
     }
-    const ids = await client.vaultFetch(
-      req.params.vaultId,
-      req.query.search.toString(),
-      {
-        size: Number.parseInt(req.query.size?.toString() || "0"),
-        after: req.query.after?.toString(),
-      }
+    if (req.body.after?.length) {
+      input.after = req.body.after;
+    }
+    const tokens = await client.vaultFetch(input);
+    res.json(tokens);
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.post("/api/vault/get", async (req, res, next) => {
+  try {
+    const input: vaultGetInput[] = req.body.map(
+      (getInput: { vault_id: string; tokens: string[] }) => ({
+        vaultID: getInput.vault_id,
+        tokens: getInput.tokens,
+      })
     );
-    res.json(ids);
+    const values = await client.vaultGet(input);
+    res.json(values);
   } catch (error) {
     next(error);
   }
 });
 
-app.post("/api/vault/:vaultId/get", async (req, res, next) => {
+app.post("/api/vault/update", async (req, res, next) => {
   try {
-    const data = await client.vaultGet(req.params.vaultId, req.body);
-    res.json(data);
-  } catch (error) {
-    next(error);
-  }
-});
-
-app.put("/api/vault/:vaultId/:token", async (req, res, next) => {
-  try {
-    await client.vaultUpdate(req.params.vaultId, req.params.token, req.body);
+    const input: vaultUpdateInput[] = req.body.map(
+      (updateInput: {
+        vault_id: string;
+        values: { token: string; value: any }[];
+      }) => ({
+        vaultID: updateInput.vault_id,
+        values: updateInput.values,
+      })
+    );
+    await client.vaultUpdate(input);
     res.send("OK");
   } catch (error) {
     next(error);
   }
 });
 
-app.delete("/api/vault/:vaultId/:token", async (req, res, next) => {
+app.post("/api/vault/delete", async (req, res, next) => {
   try {
-    await client.vaultDelete(req.params.vaultId, req.params.token);
+    const input: vaultDeleteInput[] = req.body.map(
+      (getInput: { vault_id: string; tokens: string[] }) => ({
+        vaultID: getInput.vault_id,
+        tokens: getInput.tokens,
+      })
+    );
+    await client.vaultDelete(input);
     res.send("OK");
   } catch (error) {
     next(error);
