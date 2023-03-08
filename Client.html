@@ -1133,7 +1133,7 @@ Require server information and return client instance.</div>
 
 <div class="columns">
     
-    <div class='param-desc column is-7'>array of decrypted data. the order of data corresponds to the order of input.</div>
+    <div class='param-desc column is-7'>array of decrypted data. the order of values corresponds to the order of input.</div>
     
     
     <div class='column is-5 has-text-left'>
@@ -1156,7 +1156,7 @@ Require server information and return client instance.</div>
     <h5>Example</h5>
     
     
-        <pre class="prettyprint"><code>const data = await client.protectionOpen({ protectionID: "your-protection-id" ,tokens: ["a", "b", "c", "d", "e"]})</code></pre>
+        <pre class="prettyprint"><code>const data = await client.protectionOpen({ protectionID: "your-protection-id" ,tokens: ["foo", "bar", "baz"]})</code></pre>
     
 
 
@@ -1387,7 +1387,7 @@ Require server information and return client instance.</div>
     <h5>Example</h5>
     
     
-        <pre class="prettyprint"><code>await client.protectionSeal([{ protectionID: "your-protection-id", primaryKeys: [1, 2, 3, 4, 5]}])</code></pre>
+        <pre class="prettyprint"><code>await client.protectionSeal([{ protectionID: "your-protection-id", primaryKeys: [1, 2, 3]}])</code></pre>
     
 
 
@@ -2034,7 +2034,7 @@ Require server information and return client instance.</div>
     <h5>Example</h5>
     
     
-        <pre class="prettyprint"><code>await client.vaultDelete([{ vaultID: "your-vault-id", tokens: ["d", "e"]}])</code></pre>
+        <pre class="prettyprint"><code>await client.vaultDelete([{ vaultID: "your-vault-id", tokens: ["foo", "bar"]}])</code></pre>
     
 
 
@@ -2062,7 +2062,7 @@ Require server information and return client instance.</div>
     
     
     <div class="description">
-        Search vault data by indexed column.
+        Search vault data by indexed column
     </div>
     
 
@@ -2357,7 +2357,7 @@ Require server information and return client instance.</div>
     <h5>Example</h5>
     
     
-        <pre class="prettyprint"><code>const tokens = await client.vaultFetch({ vaultID: "your-vault-id", search: "bob", size: 10, after: "token" })</code></pre>
+        <pre class="prettyprint"><code>const tokens = await client.vaultFetch({vaultID: "your-vault-id", search: "foo", size: 10, after: "bar"})</code></pre>
     
 
 
@@ -2588,7 +2588,7 @@ Require server information and return client instance.</div>
     <h5>Example</h5>
     
     
-        <pre class="prettyprint"><code>const values = await client.VaultGet([{ vaultID: "your-vault-id", tokens: ["a", "b", "c", "d", "e"]}]);</code></pre>
+        <pre class="prettyprint"><code>const values = await client.VaultGet([{vaultID: "your-vault-id", tokens: ["foo", "bar", "baz"]}]);</code></pre>
     
 
 
@@ -2821,7 +2821,7 @@ Require server information and return client instance.</div>
     <h5>Example</h5>
     
     
-        <pre class="prettyprint"><code>const tokens = await client.vaultStore([{ vaultID: "your-vault-id", values: [{name: "alice", secret: 123 }, { name: "bob", secret: 456 }]}]);</code></pre>
+        <pre class="prettyprint"><code>const tokens = await client.vaultStore([{vaultID: "your-vault-id", values: ["foo", "bar"]}]);</code></pre>
     
 
 
@@ -3098,7 +3098,7 @@ Require server information and return client instance.</div>
     <h5>Example</h5>
     
     
-        <pre class="prettyprint"><code>await client.vaultUpdate([{ vaultID: "your-vault-id", values: [{ token: "c", value: { name: "carol", secret: 789 }}]}])</code></pre>
+        <pre class="prettyprint"><code>await client.vaultUpdate([{vaultID: "your-vault-id", values: [{ token: "foo", value: "bar"}]}])</code></pre>
     
 
 
