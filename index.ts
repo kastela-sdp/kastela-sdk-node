@@ -3,46 +3,46 @@ import fs from "fs";
 import https from "https";
 import semver from "semver";
 
-const expectedKastelaVersion = "v0.2";
+const expectedKastelaVersion = "v0.3";
 const vaultPath = "/api/vault";
 const protectionPath = "/api/protection";
 const securePath = "/api/secure";
 
-export type vaultStoreInput = {
+export interface VaultStoreInput {
   vaultID: string;
   values: any[];
-};
+}
 
-export type vaultFetchInput = {
+export interface VaultFetchInput {
   vaultID: string;
   search: any;
   size?: number;
   after?: string;
-};
+}
 
-export type vaultGetInput = {
+export interface VaultGetInput {
   vaultID: string;
   tokens: string[];
-};
+}
 
-export type vaultUpdateInput = {
+export interface VaultUpdateInput {
   vaultID: string;
   values: { token: string; value: any }[];
-};
+}
 
-export type vaultDeleteInput = {
+export interface VaultDeleteInput {
   vaultID: string;
   tokens: string[];
-};
-export type protectionSealInput = {
+}
+export interface ProtectionSealInput {
   protectionID: string;
   primaryKeys: any[];
-};
+}
 
-export type protectionOpenInput = {
+export interface ProtectionOpenInput {
   protectionID: string;
   tokens: any[];
-};
+}
 
 /**
  * @class
@@ -115,9 +115,9 @@ export class Client {
    * @param {any[]} input[].values array of vault data
    * @return {Promise<string[][]>} array of vault token. the order of token corresponds to the order of input.
    * @example
-   * const tokens = await client.vaultStore([{ vaultID: "your-vault-id", values: [{name: "alice", secret: 123 }, { name: "bob", secret: 456 }]}]);
+   * const tokens = await client.vaultStore([{vaultID: "your-vault-id", values: ["foo", "bar"]}]);
    */
-  public async vaultStore(input: vaultStoreInput[]): Promise<string[][]> {
+  public async vaultStore(input: VaultStoreInput[]): Promise<string[][]> {
     const { tokens } = await this.#request(
       "POST",
       new URL(`${vaultPath}/store`, this.#kastelaURL),
@@ -126,7 +126,7 @@ export class Client {
     return tokens;
   }
 
-  /** Search vault data by indexed column.
+  /** Search vault data by indexed column
    * @param {Object} input input
    * @param {string} input.vaultID vault id
    * @param {string} input.search indexed column value
@@ -134,9 +134,9 @@ export class Client {
    * @param {number} [input.after] pagination after
    * @return {Promise<string[]>}
    * @example
-   * const tokens = await client.vaultFetch({ vaultID: "your-vault-id", search: "bob", size: 10, after: "token" })
+   * const tokens = await client.vaultFetch({vaultID: "your-vault-id", search: "foo", size: 10, after: "bar"})
    */
-  public async vaultFetch(input: vaultFetchInput): Promise<string[]> {
+  public async vaultFetch(input: VaultFetchInput): Promise<string[]> {
     const body: {
       vault_id: string;
       search: any;
@@ -166,9 +166,9 @@ export class Client {
    * @param {string[]} input[].tokens array of tokens
    * @return {Promise<any[][]>}
    * @example
-   * const values = await client.VaultGet([{ vaultID: "your-vault-id", tokens: ["a", "b", "c", "d", "e"]}]);
+   * const values = await client.VaultGet([{vaultID: "your-vault-id", tokens: ["foo", "bar", "baz"]}]);
    */
-  public async vaultGet(input: vaultGetInput[]): Promise<any[][]> {
+  public async vaultGet(input: VaultGetInput[]): Promise<any[][]> {
     const { values } = await this.#request(
       "POST",
       new URL(`${vaultPath}/get`, this.#kastelaURL),
@@ -185,9 +185,9 @@ export class Client {
    * @param {any} input[].values[].value value
    * @return {Promise<void>}
    * @example
-   * await client.vaultUpdate([{ vaultID: "your-vault-id", values: [{ token: "c", value: { name: "carol", secret: 789 }}]}])
+   * await client.vaultUpdate([{vaultID: "your-vault-id", values: [{ token: "foo", value: "bar"}]}])
    */
-  public async vaultUpdate(input: vaultUpdateInput[]): Promise<void> {
+  public async vaultUpdate(input: VaultUpdateInput[]): Promise<void> {
     await this.#request(
       "POST",
       new URL(`${vaultPath}/update`, this.#kastelaURL),
@@ -201,9 +201,9 @@ export class Client {
    * @param {string[]} input[].tokens array of tokens
    * @return {Promise<any[][]>}
    * @example
-   * await client.vaultDelete([{ vaultID: "your-vault-id", tokens: ["d", "e"]}])
+   * await client.vaultDelete([{ vaultID: "your-vault-id", tokens: ["foo", "bar"]}])
    */
-  public async vaultDelete(input: vaultDeleteInput[]): Promise<void> {
+  public async vaultDelete(input: VaultDeleteInput[]): Promise<void> {
     await this.#request(
       "POST",
       new URL(`${vaultPath}/delete`, this.#kastelaURL),
@@ -217,9 +217,9 @@ export class Client {
    * @param {any[]} input[].primaryKeys array of data primary keys
    * @return {Promise<void>}
    * @example
-   * await client.protectionSeal([{ protectionID: "your-protection-id", primaryKeys: [1, 2, 3, 4, 5]}])
+   * await client.protectionSeal([{ protectionID: "your-protection-id", primaryKeys: [1, 2, 3]}])
    */
-  public async protectionSeal(input: protectionSealInput[]): Promise<void> {
+  public async protectionSeal(input: ProtectionSealInput[]): Promise<void> {
     await this.#request(
       "POST",
       new URL(`${protectionPath}/seal`, this.#kastelaURL),
@@ -234,12 +234,12 @@ export class Client {
    * @param {Object[]} input protection open input data
    * @param {string} input[].protectionID protection id
    * @param {any[]} input[].tokens array of tokens
-   * @return {Promise<any[][]>} array of decrypted data. the order of data corresponds to the order of input.
+   * @return {Promise<any[][]>} array of decrypted data. the order of values corresponds to the order of input.
    * @example
-   * const data = await client.protectionOpen({ protectionID: "your-protection-id" ,tokens: ["a", "b", "c", "d", "e"]})
+   * const data = await client.protectionOpen({ protectionID: "your-protection-id" ,tokens: ["foo", "bar", "baz"]})
    */
-  public async protectionOpen(input: protectionOpenInput[]): Promise<any[][]> {
-    const { data } = await this.#request(
+  public async protectionOpen(input: ProtectionOpenInput[]): Promise<any[][]> {
+    const { values } = await this.#request(
       "POST",
       new URL(`${protectionPath}/open`, this.#kastelaURL),
       input.map((v) => ({
@@ -247,7 +247,7 @@ export class Client {
         tokens: v.tokens,
       }))
     );
-    return data;
+    return values;
   }
 
   /** Initialize secure protection.
