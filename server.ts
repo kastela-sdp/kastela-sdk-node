@@ -1,10 +1,15 @@
 import {
   Client,
-  vaultStoreInput,
-  vaultGetInput,
-  vaultUpdateInput,
-  vaultDeleteInput,
-  vaultFetchInput,
+  CryptoEncryptInput,
+  CryptoHMACInput,
+  CryptoEqualInput,
+  CryptoSignInput,
+  CryptoVerifyInput,
+  VaultStoreInput,
+  VaultGetInput,
+  VaultUpdateInput,
+  VaultDeleteInput,
+  VaultFetchInput,
 } from "./index";
 import express, { NextFunction, Request, Response } from "express";
 
@@ -18,9 +23,86 @@ const client = new Client(
 const app = express();
 app.use(express.json({ limit: 4 * 1024 * 1024 }));
 
+app.post("/api/crypto/encrypt", async (req, res, next) => {
+  try {
+    const input: CryptoEncryptInput[] = req.body.map(
+      (encryptInput: { key_id: string; mode: string; plaintexts: any[] }) => ({
+        keyID: encryptInput.key_id,
+        mode: encryptInput.mode,
+        plaintexts: encryptInput.plaintexts,
+      })
+    );
+    const ciphertexts = await client.cryptoEncrypt(input);
+    res.send(ciphertexts);
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.post("/api/crypto/decrypt", async (req, res, next) => {
+  try {
+    const input: string[] = req.body;
+    const plaintexts = await client.cryptoDecrypt(input);
+    res.send(plaintexts);
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.post("/api/crypto/hmac", async (req, res, next) => {
+  try {
+    const input: CryptoHMACInput[] = req.body.map(
+      (hmacInput: { key_id: string; mode: string; values: any[] }) => ({
+        keyID: hmacInput.key_id,
+        mode: hmacInput.mode,
+        values: hmacInput.values,
+      })
+    );
+    const hashes = await client.cryptoHMAC(input);
+    res.send(hashes);
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.post("/api/crypto/equal", async (req, res, next) => {
+  try {
+    const input: CryptoEqualInput[] = req.body;
+    const plaintexts = await client.cryptoEqual(input);
+    res.send(plaintexts);
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.post("/api/crypto/sign", async (req, res, next) => {
+  try {
+    const input: CryptoSignInput[] = req.body.map(
+      (signInput: { key_id: string; values: any[] }) => ({
+        keyID: signInput.key_id,
+        values: signInput.values,
+      })
+    );
+    const signatures = await client.cryptoSign(input);
+    res.send(signatures);
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.post("/api/crypto/verify", async (req, res, next) => {
+  try {
+    const input: CryptoVerifyInput[] = req.body;
+    const plaintexts = await client.cryptoVerify(input);
+    res.send(plaintexts);
+  } catch (error) {
+    next(error);
+  }
+});
+
 app.post("/api/vault/store", async (req, res, next) => {
   try {
-    const input: vaultStoreInput[] = req.body.map(
+    const input: VaultStoreInput[] = req.body.map(
       (storeInput: { vault_id: string; values: string[] }) => ({
         vaultID: storeInput.vault_id,
         values: storeInput.values,
@@ -35,7 +117,7 @@ app.post("/api/vault/store", async (req, res, next) => {
 
 app.post("/api/vault/fetch", async (req, res, next) => {
   try {
-    const input: vaultFetchInput = {
+    const input: VaultFetchInput = {
       vaultID: req.body.vault_id,
       search: req.body.search,
     };
@@ -54,7 +136,7 @@ app.post("/api/vault/fetch", async (req, res, next) => {
 
 app.post("/api/vault/get", async (req, res, next) => {
   try {
-    const input: vaultGetInput[] = req.body.map(
+    const input: VaultGetInput[] = req.body.map(
       (getInput: { vault_id: string; tokens: string[] }) => ({
         vaultID: getInput.vault_id,
         tokens: getInput.tokens,
@@ -69,7 +151,7 @@ app.post("/api/vault/get", async (req, res, next) => {
 
 app.post("/api/vault/update", async (req, res, next) => {
   try {
-    const input: vaultUpdateInput[] = req.body.map(
+    const input: VaultUpdateInput[] = req.body.map(
       (updateInput: {
         vault_id: string;
         values: { token: string; value: any }[];
@@ -87,7 +169,7 @@ app.post("/api/vault/update", async (req, res, next) => {
 
 app.post("/api/vault/delete", async (req, res, next) => {
   try {
-    const input: vaultDeleteInput[] = req.body.map(
+    const input: VaultDeleteInput[] = req.body.map(
       (getInput: { vault_id: string; tokens: string[] }) => ({
         vaultID: getInput.vault_id,
         tokens: getInput.tokens,
