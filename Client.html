@@ -294,7 +294,7 @@ Require server information and return client instance.</div>
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line19">line 19</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line18">line 18</a>
             </span>
         </p>
     
@@ -353,6 +353,1401 @@ Require server information and return client instance.</div>
         <div class='vertical-section'>
             <h1>Methods</h1>
             <div class="members">
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="cryptoDecrypt">
+        <a class="href-link" href="#cryptoDecrypt">#</a>
+        
+            
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                cryptoDecrypt<span class="signature">(input)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;any>>}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Decrypt data
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>input</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Array.&lt;string></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">array of ciphertext</td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="index.ts.html" class="button">View Source</a>
+            <span>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line373">line 373</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'>array of plaintext. the order of plaintext corresponds to the order of ciphertext</div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">Promise.&lt;Array.&lt;any>></code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+    <h5>Example</h5>
+    
+    
+        <pre class="prettyprint"><code>const plaintexts = await client.cryptoDecrypt(["foo", "bar"]);</code></pre>
+    
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="cryptoEncrypt">
+        <a class="href-link" href="#cryptoEncrypt">#</a>
+        
+            
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                cryptoEncrypt<span class="signature">(input)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;Array.&lt;string>>>}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Encrypt data
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>input</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Array.&lt;Object></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">input</td>
+</tr>
+
+  
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>keyID</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">key id</td>
+</tr>
+
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>mode</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">encryption mode</td>
+</tr>
+
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>plaintexts</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Array.&lt;any></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">array of plaintexts</td>
+</tr>
+
+  
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="index.ts.html" class="button">View Source</a>
+            <span>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line363">line 363</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'>array of ciphertext. the order of ciphertext corresponds to the order of input</div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">Promise.&lt;Array.&lt;Array.&lt;string>>></code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+    <h5>Example</h5>
+    
+    
+        <pre class="prettyprint"><code>const ciphertexts = await client.cryptoEncrypt([{keyID: "your-key-id", mode: "AES_GCM", plaintexts: ["foo", "bar"]}]);</code></pre>
+    
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="cryptoEqual">
+        <a class="href-link" href="#cryptoEqual">#</a>
+        
+            
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                cryptoEqual<span class="signature">(input)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;boolean>>}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Compare hash and data
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>input</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Array.&lt;Object></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">input</td>
+</tr>
+
+  
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>hash</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">hash</td>
+</tr>
+
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>value</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">any</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">value</td>
+</tr>
+
+  
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="index.ts.html" class="button">View Source</a>
+            <span>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line398">line 398</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'>array of result. the order of result corresponds to the order of input</div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">Promise.&lt;Array.&lt;boolean>></code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+    <h5>Example</h5>
+    
+    
+        <pre class="prettyprint"><code>const result = await client.cryptoEqual([{hash: "foo", value: 123}, {hash: "bar", value: 456}]);</code></pre>
+    
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="cryptoHMAC">
+        <a class="href-link" href="#cryptoHMAC">#</a>
+        
+            
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                cryptoHMAC<span class="signature">(input)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;Array.&lt;string>>>}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        HMAC data
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>input</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Array.&lt;Object></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">input</td>
+</tr>
+
+  
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>keyID</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">key id</td>
+</tr>
+
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>mode</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">hash mode</td>
+</tr>
+
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>values</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Array.&lt;any></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">array of value</td>
+</tr>
+
+  
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="index.ts.html" class="button">View Source</a>
+            <span>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line386">line 386</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'>array of hash. the order of hash corresponds to the order of input</div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">Promise.&lt;Array.&lt;Array.&lt;string>>></code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+    <h5>Example</h5>
+    
+    
+        <pre class="prettyprint"><code>const hashes = await client.cryptoHMAC([{keyID: "your-key-id", mode: "SHA256", values: ["foo", "bar"]}]);</code></pre>
+    
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="cryptoSign">
+        <a class="href-link" href="#cryptoSign">#</a>
+        
+            
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                cryptoSign<span class="signature">(input)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;Array.&lt;string>>>}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Sign data
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>input</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Array.&lt;Object></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">input</td>
+</tr>
+
+  
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>keyID</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">key id</td>
+</tr>
+
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>values</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Array.&lt;any></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">array of value</td>
+</tr>
+
+  
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="index.ts.html" class="button">View Source</a>
+            <span>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line410">line 410</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'>array of signature. the order of signature corresponds to the order of input</div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">Promise.&lt;Array.&lt;Array.&lt;string>>></code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+    <h5>Example</h5>
+    
+    
+        <pre class="prettyprint"><code>const signatures = await client.cryptoSign([{keyID: "your-key-id", values: ["foo", "bar"]}]);</code></pre>
+    
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="cryptoVerify">
+        <a class="href-link" href="#cryptoVerify">#</a>
+        
+            
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                cryptoVerify<span class="signature">(input)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;boolean>>}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Verify data signature
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>input</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Array.&lt;Object></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">input</td>
+</tr>
+
+  
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>signature</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">hash</td>
+</tr>
+
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>value</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">any</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">value</td>
+</tr>
+
+  
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="index.ts.html" class="button">View Source</a>
+            <span>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line422">line 422</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    <div class='param-desc column is-7'>array of result. the order of result corresponds to the order of input</div>
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">Promise.&lt;Array.&lt;boolean>></code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+    <h5>Example</h5>
+    
+    
+        <pre class="prettyprint"><code>const result = await client.cryptoVerify([{signature: "foo", value: 123}, {signature: "bar", value: 456}]);</code></pre>
+    
+
+
+</div>
             
                 <div class="member">
 
@@ -839,7 +2234,7 @@ Require server information and return client instance.</div>
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line431">line 431</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line585">line 585</a>
             </span>
         </p>
     
@@ -1102,7 +2497,7 @@ Require server information and return client instance.</div>
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line356">line 356</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line510">line 510</a>
             </span>
         </p>
     
@@ -1335,7 +2730,7 @@ Require server information and return client instance.</div>
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line344">line 344</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line498">line 498</a>
             </span>
         </p>
     
@@ -1517,7 +2912,7 @@ Require server information and return client instance.</div>
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line378">line 378</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line532">line 532</a>
             </span>
         </p>
     
@@ -1749,7 +3144,7 @@ Require server information and return client instance.</div>
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line368">line 368</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line522">line 522</a>
             </span>
         </p>
     
@@ -1822,7 +3217,7 @@ Require server information and return client instance.</div>
         
         <span class="code-name">
             
-                vaultDelete<span class="signature">(input)</span><span class="type-signature"> &rarr; {Promise.&lt;Array.&lt;Array.&lt;any>>>}</span>
+                vaultDelete<span class="signature">(input)</span><span class="type-signature"> &rarr; {Promise.&lt;void>}</span>
             
         </span>
     </h4>
@@ -1982,7 +3377,7 @@ Require server information and return client instance.</div>
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line332">line 332</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line486">line 486</a>
             </span>
         </p>
     
@@ -2017,7 +3412,7 @@ Require server information and return client instance.</div>
     <div class='column is-5 has-text-left'>
         <label>Type: </label>
         
-<code class="param-type">Promise.&lt;Array.&lt;Array.&lt;any>>></code>
+<code class="param-type">Promise.&lt;void></code>
 
 
     </div>
@@ -2305,7 +3700,7 @@ Require server information and return client instance.</div>
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line294">line 294</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line448">line 448</a>
             </span>
         </p>
     
@@ -2486,7 +3881,7 @@ Require server information and return client instance.</div>
 
   
 
-  <td class="description last">array of tokens</td>
+  <td class="description last">array of token</td>
 </tr>
 
   
@@ -2536,7 +3931,7 @@ Require server information and return client instance.</div>
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line306">line 306</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line460">line 460</a>
             </span>
         </p>
     
@@ -2566,6 +3961,8 @@ Require server information and return client instance.</div>
                     
 
 <div class="columns">
+    
+    <div class='param-desc column is-7'>array of value, the order of value corresponds to the order of token</div>
     
     
     <div class='column is-5 has-text-left'>
@@ -2767,7 +4164,7 @@ Require server information and return client instance.</div>
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line280">line 280</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line434">line 434</a>
             </span>
         </p>
     
@@ -2798,7 +4195,7 @@ Require server information and return client instance.</div>
 
 <div class="columns">
     
-    <div class='param-desc column is-7'>array of vault token. the order of token corresponds to the order of input.</div>
+    <div class='param-desc column is-7'>array of vault token. the order of token corresponds to the order of input</div>
     
     
     <div class='column is-5 has-text-left'>
@@ -3046,7 +4443,7 @@ Require server information and return client instance.</div>
         <p class="tag-source">
             <a href="index.ts.html" class="button">View Source</a>
             <span>
-                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line320">line 320</a>
+                <a href="index.ts.html">index.ts</a>, <a href="index.ts.html#line474">line 474</a>
             </span>
         </p>
     

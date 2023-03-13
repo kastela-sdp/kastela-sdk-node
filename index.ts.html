@@ -88,12 +88,54 @@
             <pre class="prettyprint source linenums"><code>import axios, { AxiosInstance } from "axios";
 import fs from "fs";
 import https from "https";
-import semver from "semver";
 
-const expectedKastelaVersion = "v0.3";
+const cryptoPath = "/api/crypto";
 const vaultPath = "/api/vault";
 const protectionPath = "/api/protection";
 const securePath = "/api/secure";
+
+export type EncryptionMode =
+  | "AES_GCM"
+  | "CHACHA20_POLY1305"
+  | "XCHACHA20_POLY1305";
+
+export type HashMode =
+  | "BLAKE2B_256"
+  | "BLAKE2B_512"
+  | "BLAKE2S_256"
+  | "BLAKE3_256"
+  | "BLAKE3_512"
+  | "SHA256"
+  | "SHA512"
+  | "SHA3_256"
+  | "SHA3_512";
+
+export interface CryptoEncryptInput {
+  keyID: string;
+  mode: EncryptionMode;
+  plaintexts: any[];
+}
+
+export interface CryptoHMACInput {
+  keyID: string;
+  mode: HashMode;
+  values: any[];
+}
+
+export interface CryptoEqualInput {
+  hash: string;
+  value: any;
+}
+
+export interface CryptoSignInput {
+  keyID: string;
+  values: any[];
+}
+
+export interface CryptoVerifyInput {
+  signature: string;
+  value: any;
+}
 
 export interface VaultStoreInput {
   vaultID: string;
@@ -163,24 +205,12 @@ export class Client {
 
   async #request(method: string, url: URL, body?: any) {
     try {
-      const { data, headers } = await this.#axiosInstance.request({
+      const { data } = await this.#axiosInstance.request({
         url: url.toString(),
         method,
         data: body,
       });
-      const actualKastelaVersion = headers["x-kastela-version"]!;
-      if (
-        semver.satisfies(
-          actualKastelaVersion,
-          `${expectedKastelaVersion} || v0.0.0`
-        )
-      ) {
-        return data;
-      } else {
-        throw new Error(
-          `kastela server version mismatch, expected: ${expectedKastelaVersion}.x, actual: ${actualKastelaVersion}`
-        );
-      }
+      return data;
     } catch (error: any) {
       const data = error?.response?.data;
       if (data) {
@@ -196,11 +226,124 @@ export class Client {
     }
   }
 
+  /** Encrypt data
+   * @param {Object[]} input input
+   * @param {string} input[].keyID key id
+   * @param {string} input[].mode encryption mode
+   * @param {any[]} input[].plaintexts array of plaintexts
+   * @return {Promise&lt;string[][]>} array of ciphertext. the order of ciphertext corresponds to the order of input
+   * @example
+   * const ciphertexts = await client.cryptoEncrypt([{keyID: "your-key-id", mode: "AES_GCM", plaintexts: ["foo", "bar"]}]);
+   */
+  public async cryptoEncrypt(input: CryptoEncryptInput[]): Promise&lt;string[][]> {
+    const { ciphertexts } = await this.#request(
+      "POST",
+      new URL(`${cryptoPath}/encrypt`, this.#kastelaURL),
+      input.map((v) => ({
+        key_id: v.keyID,
+        mode: v.mode,
+        plaintexts: v.plaintexts,
+      }))
+    );
+    return ciphertexts;
+  }
+
+  /** Decrypt data
+   * @param {string[]} input array of ciphertext
+   * @return {Promise&lt;any[]>} array of plaintext. the order of plaintext corresponds to the order of ciphertext
+   * @example
+   * const plaintexts = await client.cryptoDecrypt(["foo", "bar"]);
+   */
+  public async cryptoDecrypt(input: string[]): Promise&lt;any[]> {
+    const { plaintexts } = await this.#request(
+      "POST",
+      new URL(`${cryptoPath}/decrypt`, this.#kastelaURL),
+      input
+    );
+    return plaintexts;
+  }
+
+  /** HMAC data
+   * @param {Object[]} input input
+   * @param {string} input[].keyID key id
+   * @param {string} input[].mode hash mode
+   * @param {any[]} input[].values array of value
+   * @return {Promise&lt;string[][]>} array of hash. the order of hash corresponds to the order of input
+   * @example
+   * const hashes = await client.cryptoHMAC([{keyID: "your-key-id", mode: "SHA256", values: ["foo", "bar"]}]);
+   */
+  public async cryptoHMAC(input: CryptoHMACInput[]): Promise&lt;string[][]> {
+    const { hashes } = await this.#request(
+      "POST",
+      new URL(`${cryptoPath}/hmac`, this.#kastelaURL),
+      input.map((v) => ({
+        key_id: v.keyID,
+        mode: v.mode,
+        values: v.values,
+      }))
+    );
+    return hashes;
+  }
+
+  /** Compare hash and data
+   * @param {Object[]} input input
+   * @param {string} input[].hash hash
+   * @param {any} input[].value value
+   * @return {Promise&lt;boolean[]>} array of result. the order of result corresponds to the order of input
+   * @example
+   * const result = await client.cryptoEqual([{hash: "foo", value: 123}, {hash: "bar", value: 456}]);
+   */
+  public async cryptoEqual(input: CryptoEqualInput[]): Promise&lt;boolean[]> {
+    const { result } = await this.#request(
+      "POST",
+      new URL(`${cryptoPath}/equal`, this.#kastelaURL),
+      input
+    );
+    return result;
+  }
+
+  /** Sign data
+   * @param {Object[]} input input
+   * @param {string} input[].keyID key id
+   * @param {any[]} input[].values array of value
+   * @return {Promise&lt;string[][]>} array of signature. the order of signature corresponds to the order of input
+   * @example
+   * const signatures = await client.cryptoSign([{keyID: "your-key-id", values: ["foo", "bar"]}]);
+   */
+  public async cryptoSign(input: CryptoSignInput[]): Promise&lt;string[][]> {
+    const { signatures } = await this.#request(
+      "POST",
+      new URL(`${cryptoPath}/sign`, this.#kastelaURL),
+      input.map((v) => ({
+        key_id: v.keyID,
+        values: v.values,
+      }))
+    );
+    return signatures;
+  }
+
+  /** Verify data signature
+   * @param {Object[]} input input
+   * @param {string} input[].signature hash
+   * @param {any} input[].value value
+   * @return {Promise&lt;boolean[]>} array of result. the order of result corresponds to the order of input
+   * @example
+   * const result = await client.cryptoVerify([{signature: "foo", value: 123}, {signature: "bar", value: 456}]);
+   */
+  public async cryptoVerify(input: CryptoVerifyInput[]): Promise&lt;boolean[]> {
+    const { result } = await this.#request(
+      "POST",
+      new URL(`${cryptoPath}/verify`, this.#kastelaURL),
+      input
+    );
+    return result;
+  }
+
   /** Store vault data
    * @param {Object[]} input input
    * @param {string} input[].vaultID vault id
    * @param {any[]} input[].values array of vault data
-   * @return {Promise&lt;string[][]>} array of vault token. the order of token corresponds to the order of input.
+   * @return {Promise&lt;string[][]>} array of vault token. the order of token corresponds to the order of input
    * @example
    * const tokens = await client.vaultStore([{vaultID: "your-vault-id", values: ["foo", "bar"]}]);
    */
@@ -250,8 +393,8 @@ export class Client {
   /** Get vault data
    * @param {Object[]} input
    * @param {string} input[].vaultID vault id
-   * @param {string[]} input[].tokens array of tokens
-   * @return {Promise&lt;any[][]>}
+   * @param {string[]} input[].tokens array of token
+   * @return {Promise&lt;any[][]>} array of value, the order of value corresponds to the order of token
    * @example
    * const values = await client.VaultGet([{vaultID: "your-vault-id", tokens: ["foo", "bar", "baz"]}]);
    */
@@ -286,7 +429,7 @@ export class Client {
    * @param {Object[]} input
    * @param {string} input[].vaultID vault id
    * @param {string[]} input[].tokens array of tokens
-   * @return {Promise&lt;any[][]>}
+   * @return {Promise&lt;void>}
    * @example
    * await client.vaultDelete([{ vaultID: "your-vault-id", tokens: ["foo", "bar"]}])
    */
