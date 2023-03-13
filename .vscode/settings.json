@@ -1,6 +1,7 @@
 {
   "conventionalCommits.scopes": [
     "protection",
-    "vault"
+    "vault",
+    "crypto"
   ]
 }
