@@ -1,6 +1,6 @@
 {
   "name": "@kastela-sdp/kastela-sdk-node",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Kastela Server SDK for Node.js",
   "main": "index.js",
   "scripts": {
