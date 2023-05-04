@@ -432,6 +432,31 @@ export class Client {
     );
   }
 
+  /** Initialize secure vault.
+   * @param {string} operation secure vault operation mode
+   * @param {string[]} vaultIDs array of vault id
+   * @param {number} ttl time to live in minutes
+   * @return {Promise<{ credential: string}>} secure vault credential
+   * @example
+   * const { credential } = await client.secureVaultInit(["your-vault-id"], 5)
+   */
+  public async secureVaultInit(
+    operation: "READ" | "WRITE",
+    vaultIDs: string[],
+    ttl: number
+  ): Promise<{ credential: string }> {
+    const { credential } = await this.#request(
+      "POST",
+      new URL(`${securePath}/vault/init`, this.#kastelaURL),
+      {
+        operation,
+        vault_ids: vaultIDs,
+        ttl: ttl,
+      }
+    );
+    return { credential };
+  }
+
   /**
    *  proxying your request.
    * @param {"json"|"xml"} type request body type
