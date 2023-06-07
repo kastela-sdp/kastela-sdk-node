@@ -101,18 +101,25 @@
 
     <section>
         <article><h1>Kastela Server SDK for Node.js</h1>
-<p>Credential is required when using the SDK, download it on the entities page.</p>
-<p>Usage Examples :</p>
-<pre class="prettyprint source lang-js"><code>const protectionId = &quot;28e61e5f-d575-49db-8dfb-1c5063213a76&quot;;
+<h2>Installation</h2>
+<pre class="prettyprint source lang-bash"><code>npm install @kastela-sdp/kastela-sdk-node
+</code></pre>
+<h2>Usage</h2>
+<pre class="prettyprint source lang-js"><code>const { Client } = require(&quot;@kastela-sdp/kastela-sdk-node&quot;);
 
 const client = new Client(
-  &quot;https://127.0.0.1:8080&quot;,
+  &quot;https://127.0.0.1:3100&quot;,
   &quot;./ca.crt&quot;,
   &quot;./client.crt&quot;,
   &quot;./client.key&quot;
 );
 
-const data = client.protectionOpen(protectionId, [1, 2, 3, 4]);
+const protectionID = &quot;28e61e5f-d575-49db-8dfb-1c5063213a76&quot;;
+const tokens = [&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;];
+
+const data = await client.protectionOpen([{ protectionID, tokens }]);
+
+console.log(data);
 </code></pre></article>
     </section>
 
