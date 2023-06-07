@@ -1,18 +1,27 @@
 # Kastela Server SDK for Node.js
 
-Credential is required when using the SDK, download it on the entities page.
+## Installation
 
-Usage Examples :
+```bash
+npm install @kastela-sdp/kastela-sdk-node
+```
+
+## Usage
 
 ```js
-const protectionId = "28e61e5f-d575-49db-8dfb-1c5063213a76";
+const { Client } = require("@kastela-sdp/kastela-sdk-node");
 
 const client = new Client(
-  "https://127.0.0.1:8080",
+  "https://127.0.0.1:3100",
   "./ca.crt",
   "./client.crt",
   "./client.key"
 );
 
-const data = client.protectionOpen(protectionId, [1, 2, 3, 4]);
+const protectionID = "28e61e5f-d575-49db-8dfb-1c5063213a76";
+const tokens = ["foo", "bar", "baz"];
+
+const data = await client.protectionOpen([{ protectionID, tokens }]);
+
+console.log(data);
 ```
