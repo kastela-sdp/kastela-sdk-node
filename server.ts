@@ -6,10 +6,13 @@ import {
   CryptoSignInput,
   CryptoVerifyInput,
   VaultStoreInput,
+  VaultFetchInput,
+  VaultCountInput,
   VaultGetInput,
   VaultUpdateInput,
   VaultDeleteInput,
-  VaultFetchInput,
+  ProtectionSealInput,
+  ProtectionOpenInput,
 } from "./index";
 import express, { NextFunction, Request, Response } from "express";
 
@@ -134,6 +137,19 @@ app.post("/api/vault/fetch", async (req, res, next) => {
   }
 });
 
+app.post("/api/vault/count", async (req, res, next) => {
+  try {
+    const input: VaultCountInput = {
+      vaultID: req.body.vault_id,
+      search: req.body.search,
+    };
+    const count = await client.vaultCount(input);
+    res.json(count);
+  } catch (error) {
+    next(error);
+  }
+});
+
 app.post("/api/vault/get", async (req, res, next) => {
   try {
     const input: VaultGetInput[] = req.body.map(
@@ -170,9 +186,9 @@ app.post("/api/vault/update", async (req, res, next) => {
 app.post("/api/vault/delete", async (req, res, next) => {
   try {
     const input: VaultDeleteInput[] = req.body.map(
-      (getInput: { vault_id: string; tokens: string[] }) => ({
-        vaultID: getInput.vault_id,
-        tokens: getInput.tokens,
+      (deleteInput: { vault_id: string; tokens: string[] }) => ({
+        vaultID: deleteInput.vault_id,
+        tokens: deleteInput.tokens,
       })
     );
     await client.vaultDelete(input);
@@ -184,7 +200,13 @@ app.post("/api/vault/delete", async (req, res, next) => {
 
 app.post("/api/protection/seal", async (req, res, next) => {
   try {
-    await client.protectionSeal(req.body);
+    const input: ProtectionSealInput[] = req.body.map(
+      (sealInput: { protection_id: string; primary_keys: any[] }) => ({
+        protectionID: sealInput.protection_id,
+        primaryKeys: sealInput.primary_keys,
+      })
+    );
+    await client.protectionSeal(input);
     res.send("OK");
   } catch (error) {
     next(error);
@@ -193,8 +215,38 @@ app.post("/api/protection/seal", async (req, res, next) => {
 
 app.post("/api/protection/open", async (req, res, next) => {
   try {
-    const data = await client.protectionOpen(req.body);
+    const input: ProtectionOpenInput[] = req.body.map(
+      (openInput: { protection_id: string; tokens: any[] }) => ({
+        protectionID: openInput.protection_id,
+        tokens: openInput.tokens,
+      })
+    );
+    const data = await client.protectionOpen(input);
     res.json(data);
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.post("/api/protection/fetch", async (req, res, next) => {
+  try {
+    const primaryKeys = await client.protectionFetch({
+      protectionID: req.body.protection_id,
+      search: req.body.search,
+    });
+    res.json(primaryKeys);
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.post("/api/protection/count", async (req, res, next) => {
+  try {
+    const count = await client.protectionCount({
+      protectionID: req.body.protection_id,
+      search: req.body.search,
+    });
+    res.json(count);
   } catch (error) {
     next(error);
   }
