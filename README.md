@@ -18,10 +18,10 @@ const client = new Client(
   "./client.key"
 );
 
-const protectionID = "28e61e5f-d575-49db-8dfb-1c5063213a76";
-const tokens = ["foo", "bar", "baz"];
-
-const data = await client.protectionOpen([{ protectionID, tokens }]);
+const data = await client.protectionOpen([{
+  protectionID: "your-protection-id",
+  tokens: ["foo", "bar", "baz"]
+}]);
 
 console.log(data);
 ```
