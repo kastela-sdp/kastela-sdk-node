@@ -150,6 +150,11 @@ export interface VaultFetchInput {
   after?: string;
 }
 
+export interface VaultCountInput {
+  vaultID: string;
+  search: any;
+}
+
 export interface VaultGetInput {
   vaultID: string;
   tokens: string[];
@@ -164,6 +169,7 @@ export interface VaultDeleteInput {
   vaultID: string;
   tokens: string[];
 }
+
 export interface ProtectionSealInput {
   protectionID: string;
   primaryKeys: any[];
@@ -172,6 +178,16 @@ export interface ProtectionSealInput {
 export interface ProtectionOpenInput {
   protectionID: string;
   tokens: any[];
+}
+
+export interface ProtectionFetchInput {
+  protectionID: string;
+  search: any;
+}
+
+export interface ProtectionCountInput {
+  protectionID: string;
+  search: any;
 }
 
 /**
@@ -315,10 +331,7 @@ export class Client {
     const { signatures } = await this.#request(
       "POST",
       new URL(`${cryptoPath}/sign`, this.#kastelaURL),
-      input.map((v) => ({
-        key_id: v.keyID,
-        values: v.values,
-      }))
+      input.map((v) => ({ key_id: v.keyID, values: v.values }))
     );
     return signatures;
   }
@@ -357,12 +370,10 @@ export class Client {
     return tokens;
   }
 
-  /** Search vault data by indexed column
+  /** Search vault data
    * @param {Object} input input
    * @param {string} input.vaultID vault id
-   * @param {string} input.search indexed column value
-   * @param {number} [input.size] pagination limit
-   * @param {number} [input.after] pagination after
+   * @param {string} input.search data to search
    * @return {Promise&lt;string[]>}
    * @example
    * const tokens = await client.vaultFetch({vaultID: "your-vault-id", search: "foo", size: 10, after: "bar"})
@@ -373,10 +384,7 @@ export class Client {
       search: any;
       size?: number;
       after?: string;
-    } = {
-      vault_id: input.vaultID,
-      search: input.search,
-    };
+    } = { vault_id: input.vaultID, search: input.search };
     if (input.size) {
       body.size = input.size;
     }
@@ -389,6 +397,27 @@ export class Client {
       body
     );
     return tokens;
+  }
+
+  /** Count vault data
+   * @param {Object} input input
+   * @param {string} input.vaultID vault id
+   * @param {string} input.search data to search
+   * @return {Promise&lt;string[]>}
+   * @example
+   * const tokens = await client.vaultFetch({vaultID: "your-vault-id", search: "foo", size: 10, after: "bar"})
+   */
+  public async vaultCount(input: VaultCountInput): Promise&lt;string[]> {
+    const body: { vault_id: string; search: any } = {
+      vault_id: input.vaultID,
+      search: input.search,
+    };
+    const { count } = await this.#request(
+      "POST",
+      new URL(`${vaultPath}/count`, this.#kastelaURL),
+      body
+    );
+    return count;
   }
 
   /** Get vault data
@@ -467,18 +496,49 @@ export class Client {
    * @param {any[]} input[].tokens array of tokens
    * @return {Promise&lt;any[][]>} array of decrypted data. the order of values corresponds to the order of input.
    * @example
-   * const data = await client.protectionOpen({ protectionID: "your-protection-id" ,tokens: ["foo", "bar", "baz"]})
+   * const data = await client.protectionOpen([{ protectionID: "your-protection-id", tokens: ["foo", "bar", "baz"]}])
    */
   public async protectionOpen(input: ProtectionOpenInput[]): Promise&lt;any[][]> {
     const { values } = await this.#request(
       "POST",
       new URL(`${protectionPath}/open`, this.#kastelaURL),
-      input.map((v) => ({
-        protection_id: v.protectionID,
-        tokens: v.tokens,
-      }))
+      input.map((v) => ({ protection_id: v.protectionID, tokens: v.tokens }))
     );
     return values;
+  }
+
+  /** Fetch protection data
+   * @param {Object} input protection fetch input data
+   * @param {string} input.protectionID protection id
+   * @param {any} input.search data to search
+   * @return {Promise&lt;any[]>} array of primary keys
+   * @example
+   * const primaryKeys = await client.protectionFetch({ protectionID: "your-protection-id", search: "foo"})
+   */
+  public async protectionFetch(input: ProtectionFetchInput): Promise&lt;any[]> {
+    const { primary_keys } = await this.#request(
+      "POST",
+      new URL(`${protectionPath}/fetch`, this.#kastelaURL),
+      { protection_id: input.protectionID, search: input.search }
+    );
+    return primary_keys;
+  }
+
+  /** Count protection data
+   * @param {Object} input protection count input data
+   * @param {string} input.protectionID protection id
+   * @param {any} input.search data to search
+   * @return {Promise&lt;number>} count of data
+   * @example
+   * const count = await client.protectionCount({ protectionID: "your-protection-id", search: "foo"})
+   */
+  public async protectionCount(input: ProtectionCountInput): Promise&lt;any[]> {
+    const { count } = await this.#request(
+      "POST",
+      new URL(`${protectionPath}/count`, this.#kastelaURL),
+      { protection_id: input.protectionID, search: input.search }
+    );
+    return count;
   }
 
   /** Initialize secure protection.
