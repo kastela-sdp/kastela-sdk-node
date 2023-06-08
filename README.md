@@ -25,3 +25,7 @@ const data = await client.protectionOpen([{
 
 console.log(data);
 ```
+
+## Reference
+
+- [Documentation](https://kastela-sdp.github.io/kastela-sdk-node)
