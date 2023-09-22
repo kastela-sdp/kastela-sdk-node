@@ -1,3 +1,4 @@
+import fs from "fs";
 import {
   Client,
   CryptoEncryptInput,
@@ -16,11 +17,15 @@ import {
 } from "./index";
 import express, { NextFunction, Request, Response } from "express";
 
+const caCert = fs.readFileSync("./credentials/ca.crt");
+const clientCert = fs.readFileSync("./credentials/client.crt");
+const clientKey = fs.readFileSync("./credentials/client.key");
+
 const client = new Client(
   "https://127.0.0.1:3100",
-  "./credentials/ca.crt",
-  "./credentials/client.crt",
-  "./credentials/client.key"
+  caCert,
+  clientCert,
+  clientKey
 );
 
 const app = express();
