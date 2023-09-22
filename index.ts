@@ -1,5 +1,4 @@
 import axios, { AxiosInstance } from "axios";
-import fs from "fs";
 import https from "https";
 
 const cryptoPath = "/api/crypto";
@@ -108,9 +107,9 @@ export interface ProtectionCountInput {
  * Create a new Kastela Client instance for communicating with the server.
  * Require server information and return client instance.
  * @param {string} kastelaUrl Kastela server url
- * @param {string} caCertPath Kastela ca certificate path
- * @param {string} clientCertPath Kastela client certificate path
- * @param {string} clientKeyPath kastela client key path
+ * @param {string} caCert Kastela ca certificate
+ * @param {string} clientCert Kastela client certificate
+ * @param {string} clientKey kastela client key
  */
 export class Client {
   #axiosInstance: AxiosInstance;
@@ -118,15 +117,15 @@ export class Client {
 
   public constructor(
     kastelaURL: string,
-    caCertPath: string,
-    clientCertPath: string,
-    clientKeyPath: string
+    caCert: Buffer,
+    clientCert: Buffer,
+    clientKey: Buffer
   ) {
     this.#kastelaURL = kastelaURL;
     const httpsAgent = new https.Agent({
-      ca: fs.readFileSync(caCertPath),
-      cert: fs.readFileSync(clientCertPath),
-      key: fs.readFileSync(clientKeyPath),
+      ca: caCert,
+      cert: clientCert,
+      key: clientKey,
     });
     this.#axiosInstance = axios.create({
       httpsAgent,
