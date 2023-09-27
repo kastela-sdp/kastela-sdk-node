@@ -12,6 +12,7 @@ import {
   VaultGetInput,
   VaultUpdateInput,
   VaultDeleteInput,
+  ProtectionTokenizeInput,
   ProtectionSealInput,
   ProtectionOpenInput,
 } from "./index";
@@ -198,6 +199,21 @@ app.post("/api/vault/delete", async (req, res, next) => {
     );
     await client.vaultDelete(input);
     res.send("OK");
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.post("/api/protection/tokenize", async (req, res, next) => {
+  try {
+    const input: ProtectionTokenizeInput[] = req.body.map(
+      (tokenizeInput: { protection_id: string; values: any[] }) => ({
+        protectionID: tokenizeInput.protection_id,
+        values: tokenizeInput.values,
+      })
+    );
+    const tokens = await client.protectionTokenize(input);
+    res.send(tokens);
   } catch (error) {
     next(error);
   }
