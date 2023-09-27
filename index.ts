@@ -82,6 +82,11 @@ export interface VaultDeleteInput {
   tokens: string[];
 }
 
+export interface ProtectionTokenizeInput {
+  protectionID: string;
+  values: any[];
+}
+
 export interface ProtectionSealInput {
   protectionID: string;
   primaryKeys: any[];
@@ -317,9 +322,9 @@ export class Client {
    * @param {string} input.search data to search
    * @return {Promise<string[]>}
    * @example
-   * const tokens = await client.vaultFetch({vaultID: "your-vault-id", search: "foo", size: 10, after: "bar"})
+   * const count = await client.vaultCount({vaultID: "your-vault-id", search: "foo"})
    */
-  public async vaultCount(input: VaultCountInput): Promise<string[]> {
+  public async vaultCount(input: VaultCountInput): Promise<number> {
     const body: { vault_id: string; search: any } = {
       vault_id: input.vaultID,
       search: input.search,
@@ -381,6 +386,28 @@ export class Client {
       new URL(`${vaultPath}/delete`, this.#kastelaURL),
       input.map((v) => ({ vault_id: v.vaultID, tokens: v.tokens }))
     );
+  }
+
+  /** Tokenize data for protection
+   * @param {Object[]} input protection tokenize input data
+   * @param {string} input[].protectionID protection id
+   * @param {any[]} input[].values array of data
+   * @return {Promise<void>}
+   * @example
+   * const tokens = await client.protectionTokenize([{ protectionID: "your-protection-id", values: ["foo", "bar", "baz"]}])
+   */
+  public async protectionTokenize(
+    input: ProtectionTokenizeInput[]
+  ): Promise<any[]> {
+    const { tokens } = await this.#request(
+      "POST",
+      new URL(`${protectionPath}/tokenize`, this.#kastelaURL),
+      input.map((v) => ({
+        protection_id: v.protectionID,
+        values: v.values,
+      }))
+    );
+    return tokens;
   }
 
   /** Encrypt protection data
