@@ -398,7 +398,7 @@ export class Client {
    */
   public async protectionTokenize(
     input: ProtectionTokenizeInput[]
-  ): Promise<any[]> {
+  ): Promise<any[][]> {
     const { tokens } = await this.#request(
       "POST",
       new URL(`${protectionPath}/tokenize`, this.#kastelaURL),
@@ -471,7 +471,7 @@ export class Client {
    * @example
    * const count = await client.protectionCount({ protectionID: "your-protection-id", search: "foo"})
    */
-  public async protectionCount(input: ProtectionCountInput): Promise<any[]> {
+  public async protectionCount(input: ProtectionCountInput): Promise<number> {
     const { count } = await this.#request(
       "POST",
       new URL(`${protectionPath}/count`, this.#kastelaURL),
